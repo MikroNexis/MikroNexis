@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mikronexis – Connecting Ideas to Reality. Engineering-driven technology consulting and product engineering company specializing in software, embedded systems, and hardware solutions." />
+  <meta name="keywords" content="Mikronexis, software consulting, embedded systems, hardware design, mobile development, web development, IoT, firmware, PCB design" />
+  <title>Mikronexis – Connecting Ideas to Reality</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assests/logo_dark.png" />
+</head>
+<body>
+
+  <!-- ========== PRELOADER ========== -->
+  <div id="preloader">
+    <div class="preloader-inner">
+      <img src="assests/logo_dark.png" alt="Mikronexis" class="preloader-logo" />
+      <div class="preloader-bar"><span></span></div>
+    </div>
+  </div>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">
+        <img src="assests/logo_dark.png" alt="Mikronexis Logo" class="logo-img" />
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#why-us" class="nav-link">Why Us</a></li>
+        <li><a href="#market" class="nav-link">Industries</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="#contact" class="nav-cta-btn">Get Started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section id="home" class="hero-section">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-particles" id="heroParticles"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Engineering Excellence &amp; Innovation
+      </div>
+
+      <h1 class="hero-title">
+        Connecting<br />
+        <span class="gradient-text">Ideas to Reality</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Mikronexis is an engineering-driven technology company specializing in building intelligent systems
+        across software, embedded systems, and hardware. We transform your vision into scalable, high-performance solutions.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#services" class="btn btn-primary">
+          Explore Services <i class="fas fa-arrow-right"></i>
+        </a>
+        <a href="#contact" class="btn btn-outline">
+          Let's Talk <i class="fas fa-comments"></i>
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number" data-target="5">0</span><span>+</span>
+          <span class="stat-label">Service Domains</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="100">0</span><span>%</span>
+          <span class="stat-label">Quality Focus</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="360">0</span><span>°</span>
+          <span class="stat-label">Full-Stack Engineering</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-banner">
+      <div class="banner-glow"></div>
+      <img src="assests/mikronexisBannerOnly2.png" alt="Mikronexis Banner" class="banner-image" />
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </section>
+
+  <!-- ========== TECH STRIP ========== -->
+  <div class="tech-strip">
+    <div class="strip-track">
+      <span><i class="fab fa-android"></i> Android</span>
+      <span><i class="fab fa-apple"></i> iOS</span>
+      <span><i class="fas fa-globe"></i> Web Apps</span>
+      <span><i class="fas fa-desktop"></i> Desktop</span>
+      <span><i class="fas fa-microchip"></i> Firmware</span>
+      <span><i class="fas fa-wifi"></i> IoT</span>
+      <span><i class="fas fa-circuit-board"></i> PCB Design</span>
+      <span><i class="fas fa-server"></i> Backend & APIs</span>
+      <span><i class="fas fa-brain"></i> AI / ML</span>
+      <span><i class="fab fa-android"></i> Android</span>
+      <span><i class="fab fa-apple"></i> iOS</span>
+      <span><i class="fas fa-globe"></i> Web Apps</span>
+      <span><i class="fas fa-desktop"></i> Desktop</span>
+      <span><i class="fas fa-microchip"></i> Firmware</span>
+      <span><i class="fas fa-wifi"></i> IoT</span>
+      <span><i class="fas fa-circuit-board"></i> PCB Design</span>
+      <span><i class="fas fa-server"></i> Backend & APIs</span>
+      <span><i class="fas fa-brain"></i> AI / ML</span>
+    </div>
+  </div>
+
+  <!-- ========== ABOUT SECTION ========== -->
+  <section id="about" class="about-section section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual" data-aos="fade-right">
+          <div class="about-card-main">
+            <div class="about-icon-grid">
+              <div class="icon-cell"><i class="fas fa-mobile-alt"></i></div>
+              <div class="icon-cell"><i class="fas fa-globe"></i></div>
+              <div class="icon-cell"><i class="fas fa-microchip"></i></div>
+              <div class="icon-cell"><i class="fas fa-cpu"></i></div>
+              <div class="icon-cell center-cell"><img src="assests/logo_dark.png" alt="Mikronexis" /></div>
+              <div class="icon-cell"><i class="fas fa-wifi"></i></div>
+              <div class="icon-cell"><i class="fas fa-desktop"></i></div>
+              <div class="icon-cell"><i class="fas fa-server"></i></div>
+              <div class="icon-cell"><i class="fas fa-brain"></i></div>
+            </div>
+          </div>
+          <div class="about-float-badge badge-top">
+            <i class="fas fa-award"></i>
+            <div>
+              <strong>Engineering Excellence</strong>
+              <span>Precision at every layer</span>
+            </div>
+          </div>
+          <div class="about-float-badge badge-bottom">
+            <i class="fas fa-rocket"></i>
+            <div>
+              <strong>Future-Ready</strong>
+              <span>Built to scale &amp; evolve</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-content" data-aos="fade-left">
+          <div class="section-tag">About Us</div>
+          <h2 class="section-title">Who We Are</h2>
+          <p class="about-lead">
+            Mikronexis is derived from <strong>Mikro</strong> — precision and depth — and <strong>Nexis</strong> (Nexus) — connection and integration. Together, we build intelligent, connected, and scalable systems at the intersection of software and hardware.
+          </p>
+          <p class="about-body">
+            We are an engineering-driven technology consulting and product company. From mobile and web applications to firmware, embedded hardware, and IoT systems, we provide end-to-end engineering expertise that transforms complex ideas into real, working systems.
+          </p>
+
+          <div class="about-pillars">
+            <div class="pillar">
+              <div class="pillar-icon"><i class="fas fa-eye"></i></div>
+              <div>
+                <h4>Vision</h4>
+                <p>To become a globally recognized technology company delivering intelligent systems and innovative products across software and hardware domains.</p>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-icon"><i class="fas fa-bullseye"></i></div>
+              <div>
+                <h4>Mission</h4>
+                <p>To design, develop, and deliver high-quality, scalable, and efficient technology solutions that bridge software and hardware seamlessly.</p>
+              </div>
+            </div>
+          </div>
+
+          <a href="#services" class="btn btn-primary mt-2">Our Services <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES SECTION ========== -->
+  <section id="services" class="services-section section">
+    <div class="services-bg-pattern"></div>
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <div class="section-tag">What We Do</div>
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-sub">
+          Comprehensive engineering services from digital software to physical hardware — all under one roof.
+        </p>
+      </div>
+
+      <div class="services-grid">
+
+        <!-- Software Development -->
+        <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-number">01</div>
+          <div class="service-icon-wrap">
+            <i class="fas fa-code"></i>
+          </div>
+          <h3>Software Development</h3>
+          <p>Full-spectrum software engineering from mobile to web to desktop, built for performance and scalability.</p>
+          <ul class="service-list">
+            <li><i class="fab fa-android"></i> Android Applications</li>
+            <li><i class="fab fa-apple"></i> iOS Applications</li>
+            <li><i class="fas fa-globe"></i> Web Applications</li>
+            <li><i class="fas fa-desktop"></i> Desktop Software</li>
+            <li><i class="fas fa-server"></i> Backend Systems &amp; APIs</li>
+          </ul>
+          <div class="service-footer">
+            <a href="#contact" class="service-link">Discuss Project <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Embedded Systems -->
+        <div class="service-card featured" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-number">02</div>
+          <div class="featured-label">Core Expertise</div>
+          <div class="service-icon-wrap">
+            <i class="fas fa-microchip"></i>
+          </div>
+          <h3>Embedded Systems</h3>
+          <p>Deep embedded engineering expertise for resource-constrained, real-time, and connected devices.</p>
+          <ul class="service-list">
+            <li><i class="fas fa-code-branch"></i> Firmware Development</li>
+            <li><i class="fas fa-clock"></i> RTOS-based Systems</li>
+            <li><i class="fas fa-wifi"></i> IoT Solutions</li>
+            <li><i class="fas fa-plug"></i> Device Integration</li>
+            <li><i class="fas fa-link"></i> Protocol Implementation</li>
+          </ul>
+          <div class="service-footer">
+            <a href="#contact" class="service-link">Discuss Project <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Hardware Design -->
+        <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="service-number">03</div>
+          <div class="service-icon-wrap">
+            <i class="fas fa-cpu"></i>
+          </div>
+          <h3>Hardware Design</h3>
+          <p>From concept to prototype — embedded hardware and PCB design engineered for reliability and manufacturability.</p>
+          <ul class="service-list">
+            <li><i class="fas fa-microchip"></i> Embedded Hardware Design</li>
+            <li><i class="fas fa-drafting-compass"></i> PCB Design &amp; Prototyping</li>
+            <li><i class="fas fa-cogs"></i> System Integration</li>
+            <li><i class="fas fa-vial"></i> Hardware Testing &amp; Validation</li>
+            <li><i class="fas fa-industry"></i> Production-ready Design</li>
+          </ul>
+          <div class="service-footer">
+            <a href="#contact" class="service-link">Discuss Project <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Consulting -->
+        <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="service-number">04</div>
+          <div class="service-icon-wrap">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h3>Technology Consulting</h3>
+          <p>Strategic technology advisory to help you make the right architectural and engineering decisions from day one.</p>
+          <ul class="service-list">
+            <li><i class="fas fa-sitemap"></i> System Architecture Design</li>
+            <li><i class="fas fa-tasks"></i> Technical Roadmapping</li>
+            <li><i class="fas fa-search"></i> Technology Assessment</li>
+            <li><i class="fas fa-shield-alt"></i> Risk Analysis</li>
+            <li><i class="fas fa-handshake"></i> MVP / Prototype Strategy</li>
+          </ul>
+          <div class="service-footer">
+            <a href="#contact" class="service-link">Discuss Project <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- MCAD (Optional) -->
+        <div class="service-card upcoming" data-aos="fade-up" data-aos-delay="500">
+          <div class="service-number">05</div>
+          <div class="upcoming-label">Coming Soon</div>
+          <div class="service-icon-wrap">
+            <i class="fas fa-cube"></i>
+          </div>
+          <h3>Mechanical Design (MCAD)</h3>
+          <p>Mechanical enclosure and product design for embedded hardware — bridging electronics with physical product design.</p>
+          <ul class="service-list">
+            <li><i class="fas fa-ruler-combined"></i> Enclosure Design</li>
+            <li><i class="fas fa-cube"></i> 3D Modeling</li>
+            <li><i class="fas fa-print"></i> Rapid Prototyping</li>
+            <li><i class="fas fa-th-large"></i> DFM Optimization</li>
+          </ul>
+          <div class="service-footer">
+            <span class="service-link-upcoming"><i class="fas fa-clock"></i> In Development</span>
+          </div>
+        </div>
+
+        <!-- AI / ML -->
+        <div class="service-card upcoming" data-aos="fade-up" data-aos-delay="600">
+          <div class="service-number">06</div>
+          <div class="upcoming-label">Future</div>
+          <div class="service-icon-wrap">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3>AI &amp; Machine Learning</h3>
+          <p>Intelligent automation and AI-driven solutions to elevate products with smart, adaptive capabilities.</p>
+          <ul class="service-list">
+            <li><i class="fas fa-robot"></i> Intelligent Automation</li>
+            <li><i class="fas fa-chart-line"></i> Predictive Analytics</li>
+            <li><i class="fas fa-eye"></i> Computer Vision</li>
+            <li><i class="fas fa-comments"></i> NLP Solutions</li>
+          </ul>
+          <div class="service-footer">
+            <span class="service-link-upcoming"><i class="fas fa-clock"></i> In Roadmap</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHY US / CORE VALUES ========== -->
+  <section id="why-us" class="values-section section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <div class="section-tag">Why Mikronexis</div>
+        <h2 class="section-title">Our Core Values</h2>
+        <p class="section-sub">These principles guide every decision, every line of code, and every circuit we design.</p>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="value-icon"><i class="fas fa-gem"></i></div>
+          <h3>Engineering Excellence</h3>
+          <p>Strong focus on quality and precision at every layer of development — from architecture to deployment.</p>
+        </div>
+        <div class="value-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="value-icon"><i class="fas fa-lightbulb"></i></div>
+          <h3>Innovation</h3>
+          <p>Continuous improvement and forward-thinking keeps our solutions ahead of technology curves.</p>
+        </div>
+        <div class="value-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Reliability</h3>
+          <p>We build systems that clients can trust — robust, tested, and ready for production environments.</p>
+        </div>
+        <div class="value-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="value-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+          <h3>Scalability</h3>
+          <p>Solutions designed with growth in mind — architected to scale from prototype to enterprise level.</p>
+        </div>
+        <div class="value-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="value-icon"><i class="fas fa-handshake"></i></div>
+          <h3>Integrity</h3>
+          <p>Transparent and ethical practices — honest communication and commitment throughout every engagement.</p>
+        </div>
+        <div class="value-card" data-aos="fade-up" data-aos-delay="600">
+          <div class="value-icon"><i class="fas fa-layer-group"></i></div>
+          <h3>Full-Stack Thinking</h3>
+          <p>Holistic engineering from software logic to silicon — we see the complete system, not just its parts.</p>
+        </div>
+      </div>
+
+      <!-- Process Strip -->
+      <div class="process-strip" data-aos="fade-up">
+        <div class="section-tag center-tag">How We Work</div>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-circle"><i class="fas fa-comments"></i></div>
+            <h4>Discover</h4>
+            <p>Understand requirements, constraints, and goals through deep technical consultation.</p>
+          </div>
+          <div class="process-arrow"><i class="fas fa-chevron-right"></i></div>
+          <div class="process-step">
+            <div class="step-circle"><i class="fas fa-drafting-compass"></i></div>
+            <h4>Design</h4>
+            <p>Architect the solution — system design, technology selection, and prototyping.</p>
+          </div>
+          <div class="process-arrow"><i class="fas fa-chevron-right"></i></div>
+          <div class="process-step">
+            <div class="step-circle"><i class="fas fa-code"></i></div>
+            <h4>Develop</h4>
+            <p>Agile engineering cycles delivering working, tested increments consistently.</p>
+          </div>
+          <div class="process-arrow"><i class="fas fa-chevron-right"></i></div>
+          <div class="process-step">
+            <div class="step-circle"><i class="fas fa-vial"></i></div>
+            <h4>Validate</h4>
+            <p>Rigorous testing against real-world conditions before any delivery.</p>
+          </div>
+          <div class="process-arrow"><i class="fas fa-chevron-right"></i></div>
+          <div class="process-step">
+            <div class="step-circle"><i class="fas fa-rocket"></i></div>
+            <h4>Deploy</h4>
+            <p>Smooth delivery, documentation, and ongoing support as needed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INDUSTRIES / TARGET MARKET ========== -->
+  <section id="market" class="market-section section">
+    <div class="market-bg"></div>
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <div class="section-tag">Industries We Serve</div>
+        <h2 class="section-title">Who We Work With</h2>
+        <p class="section-sub">Mikronexis brings value across a broad range of industries and company types.</p>
+      </div>
+
+      <div class="market-grid">
+        <div class="market-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="market-icon"><i class="fas fa-rocket"></i></div>
+          <h3>Startups &amp; Product Companies</h3>
+          <p>We help early-stage and growth-stage product companies build their core technology, from MVP to production-ready systems.</p>
+        </div>
+        <div class="market-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="market-icon"><i class="fas fa-industry"></i></div>
+          <h3>Industrial &amp; Manufacturing</h3>
+          <p>Smart automation and embedded control systems for manufacturing environments requiring reliability and precision.</p>
+        </div>
+        <div class="market-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="market-icon"><i class="fas fa-wifi"></i></div>
+          <h3>IoT &amp; Smart Devices</h3>
+          <p>End-to-end solutions for connected device companies — firmware, connectivity, cloud integration, and companion apps.</p>
+        </div>
+        <div class="market-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="market-icon"><i class="fas fa-building"></i></div>
+          <h3>Enterprises</h3>
+          <p>Custom technology solutions for enterprises requiring bespoke software or hardware to meet unique operational needs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PRODUCTS TEASER ========== -->
+  <section id="products" class="products-section section">
+    <div class="container">
+      <div class="products-inner" data-aos="fade-up">
+        <div class="products-content">
+          <div class="section-tag">Coming Soon</div>
+          <h2 class="section-title">Mikronexis Products</h2>
+          <p>
+            Beyond consulting, Mikronexis is building its own portfolio of software and hardware products — intelligent tools, IoT platforms, and embedded modules designed to solve real engineering challenges.
+          </p>
+          <p>
+            Our products will reflect the same engineering standards and precision we apply to every client engagement.
+          </p>
+          <a href="#contact" class="btn btn-primary mt-2">
+            Stay Notified <i class="fas fa-bell"></i>
+          </a>
+        </div>
+        <div class="products-visual" data-aos="fade-left">
+          <div class="product-mockup">
+            <div class="mockup-screen">
+              <div class="mockup-bar"></div>
+              <div class="mockup-content">
+                <div class="mockup-icon"><i class="fas fa-box-open"></i></div>
+                <span>Products Loading...</span>
+                <div class="mockup-progress"><div class="progress-fill"></div></div>
+              </div>
+            </div>
+            <div class="mockup-glow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT SECTION ========== -->
+  <section id="contact" class="contact-section section">
+    <div class="contact-bg-pattern"></div>
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <div class="section-tag">Get In Touch</div>
+        <h2 class="section-title">Let's Build Something Great</h2>
+        <p class="section-sub">Have a project in mind? Tell us about it. We'd love to hear about your engineering challenge.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info" data-aos="fade-right">
+          <h3>Start the Conversation</h3>
+          <p>Whether you're a startup with an idea or an enterprise with a complex engineering challenge, we're ready to help you navigate the technical path forward.</p>
+
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <strong>Email Us</strong>
+                <span>info@mikronexis.com</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon"><i class="fas fa-globe"></i></div>
+              <div>
+                <strong>Website</strong>
+                <span>www.mikronexis.com</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div>
+                <strong>Location</strong>
+                <span>Available Globally · Remote-first</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-social">
+            <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-btn" aria-label="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+          </div>
+
+          <div class="contact-tagline">
+            <blockquote>
+              "At Mikronexis, we don't just develop technology — we engineer systems that power innovation, efficiency, and growth."
+            </blockquote>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap" data-aos="fade-left">
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="firstName" placeholder="John" required />
+                <span class="field-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Doe" required />
+                <span class="field-error"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="john@company.com" required />
+              <span class="field-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="company">Company / Organization</label>
+              <input type="text" id="company" name="company" placeholder="Your Company" />
+            </div>
+            <div class="form-group">
+              <label for="service">Service Interested In</label>
+              <select id="service" name="service">
+                <option value="">Select a service...</option>
+                <option value="software">Software Development</option>
+                <option value="embedded">Embedded Systems</option>
+                <option value="hardware">Hardware Design</option>
+                <option value="consulting">Technology Consulting</option>
+                <option value="mcad">Mechanical Design (MCAD)</option>
+                <option value="ai-ml">AI / Machine Learning</option>
+                <option value="multiple">Multiple Services</option>
+                <option value="products">Mikronexis Products</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Tell Us About Your Project *</label>
+              <textarea id="message" name="message" rows="5" placeholder="Describe your project, technology requirements, timeline, or any specific challenges you're facing..." required></textarea>
+              <span class="field-error"></span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+              <span class="btn-text">Send Message</span>
+              <span class="btn-loading" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Sending...</span>
+              <i class="fas fa-paper-plane"></i>
+            </button>
+            <div class="form-success" id="formSuccess" style="display:none;">
+              <i class="fas fa-check-circle"></i>
+              <p>Thank you! Your message has been received. We'll get back to you within 24–48 hours.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <img src="assests/logo_dark.png" alt="Mikronexis" class="footer-logo" />
+            <p>Engineering-driven technology consulting and product company — bridging software and hardware into intelligent, connected systems.</p>
+            <div class="footer-social">
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="#" aria-label="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Services</h4>
+            <ul>
+              <li><a href="#services">Software Development</a></li>
+              <li><a href="#services">Embedded Systems</a></li>
+              <li><a href="#services">Hardware Design</a></li>
+              <li><a href="#services">Technology Consulting</a></li>
+              <li><a href="#services">AI &amp; ML <span class="soon-tag">Soon</span></a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#why-us">Why Mikronexis</a></li>
+              <li><a href="#market">Industries</a></li>
+              <li><a href="#products">Products <span class="soon-tag">Soon</span></a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+              <li><i class="fas fa-envelope"></i> info@mikronexis.com</li>
+              <li><i class="fas fa-globe"></i> www.mikronexis.com</li>
+              <li><i class="fas fa-map-marker-alt"></i> Global · Remote-first</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span id="footerYear"></span> Mikronexis. All rights reserved.</p>
+        <p class="footer-tagline">Connecting Ideas to Reality</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
