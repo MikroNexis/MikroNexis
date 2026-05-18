@@ -327,9 +327,41 @@ document.querySelectorAll('.service-card').forEach(card => {
   });
 });
 
+// ---- PORTFOLIO FILTER ----
+function initPortfolioFilter() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.portfolio-card');
+
+  if (!filterBtns.length) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Update active button
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+
+      cards.forEach(card => {
+        const categories = card.getAttribute('data-category') || '';
+        if (filter === 'all' || categories.includes(filter)) {
+          card.classList.remove('hidden');
+          card.style.animation = 'none';
+          // Trigger reflow for re-animation
+          void card.offsetWidth;
+          card.style.animation = '';
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+}
+
 // ---- INIT ----
 document.addEventListener('DOMContentLoaded', () => {
   initAOS();
   initCounters();
   initParticles();
+  initPortfolioFilter();
 });

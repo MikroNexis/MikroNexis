@@ -46,6 +46,7 @@
         <li><a href="#home" class="nav-link active">Home</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
         <li><a href="#why-us" class="nav-link">Why Us</a></li>
         <li><a href="#market" class="nav-link">Industries</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -343,6 +344,210 @@
     </div>
   </section>
 
+  <!-- ========== PROJECTS / PORTFOLIO ========== -->
+  <section id="projects" class="projects-section section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <div class="section-tag">Our Work</div>
+        <h2 class="section-title">Projects &amp; Case Studies</h2>
+        <p class="section-sub">Real engineering challenges. Real solutions. A glimpse into what we build.</p>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="portfolio-filters" data-aos="fade-up">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="embedded">Embedded</button>
+        <button class="filter-btn" data-filter="iot">IoT</button>
+        <button class="filter-btn" data-filter="mobile">Mobile App</button>
+        <button class="filter-btn" data-filter="hardware">Hardware</button>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="portfolio-grid" id="portfolioGrid">
+
+        <!-- 1. Advanced Vehicle Tracker -->
+        <div class="portfolio-card" data-category="embedded iot" data-aos="fade-up" data-aos-delay="100">
+          <div class="pc-header">
+            <div class="pc-icon"><i class="fas fa-car"></i></div>
+            <div class="pc-tags">
+              <span class="pc-tag tag-embedded">Embedded</span>
+              <span class="pc-tag tag-iot">IoT</span>
+            </div>
+            <span class="pc-status status-completed">Completed</span>
+          </div>
+          <h3 class="pc-title">Advanced Vehicle Tracker</h3>
+          <p class="pc-desc">A GPS-based real-time vehicle tracking system with live location reporting, geofencing alerts, ignition detection, and remote monitoring via a connected backend dashboard.</p>
+          <div class="pc-stack">
+            <span>GPS Module</span>
+            <span>GSM/LTE</span>
+            <span>STM32</span>
+            <span>C Firmware</span>
+            <span>MQTT</span>
+          </div>
+          <div class="pc-outcome">
+            <i class="fas fa-check-circle"></i>
+            Real-time tracking with sub-30s location updates &amp; geofence alerts
+          </div>
+          <div class="pc-footer">
+            <span class="pc-no-link"><i class="fas fa-lock"></i> Client Project</span>
+          </div>
+        </div>
+
+        <!-- 2. Health Band -->
+        <div class="portfolio-card" data-category="embedded hardware" data-aos="fade-up" data-aos-delay="200">
+          <div class="pc-header">
+            <div class="pc-icon"><i class="fas fa-heartbeat"></i></div>
+            <div class="pc-tags">
+              <span class="pc-tag tag-embedded">Embedded</span>
+              <span class="pc-tag tag-hardware">Hardware</span>
+            </div>
+            <span class="pc-status status-completed">Completed</span>
+          </div>
+          <h3 class="pc-title">Health Band</h3>
+          <p class="pc-desc">A wearable health monitoring band that continuously tracks heart rate, SpO₂, body temperature, and activity levels, syncing data wirelessly to a companion mobile application.</p>
+          <div class="pc-stack">
+            <span>nRF52</span>
+            <span>BLE</span>
+            <span>MAX30102</span>
+            <span>PCB Design</span>
+            <span>FreeRTOS</span>
+          </div>
+          <div class="pc-outcome">
+            <i class="fas fa-check-circle"></i>
+            Continuous vitals monitoring with &lt;5% error margin on SpO₂ readings
+          </div>
+          <div class="pc-footer">
+            <span class="pc-no-link"><i class="fas fa-lock"></i> Client Project</span>
+          </div>
+        </div>
+
+        <!-- 3. Social Distancing Band -->
+        <div class="portfolio-card" data-category="embedded hardware iot" data-aos="fade-up" data-aos-delay="300">
+          <div class="pc-header">
+            <div class="pc-icon"><i class="fas fa-people-arrows"></i></div>
+            <div class="pc-tags">
+              <span class="pc-tag tag-embedded">Embedded</span>
+              <span class="pc-tag tag-iot">IoT</span>
+            </div>
+            <span class="pc-status status-completed">Completed</span>
+          </div>
+          <h3 class="pc-title">Social Distancing Band</h3>
+          <p class="pc-desc">A wearable proximity alert device using UWB and BLE to detect and warn users when safe distancing thresholds are breached — designed for workplace safety compliance.</p>
+          <div class="pc-stack">
+            <span>UWB</span>
+            <span>BLE</span>
+            <span>Nordic SoC</span>
+            <span>PCB Design</span>
+            <span>Haptic Feedback</span>
+          </div>
+          <div class="pc-outcome">
+            <i class="fas fa-check-circle"></i>
+            ±20cm proximity accuracy with instant haptic &amp; audio alerts
+          </div>
+          <div class="pc-footer">
+            <span class="pc-no-link"><i class="fas fa-lock"></i> Client Project</span>
+          </div>
+        </div>
+
+        <!-- 4. Gas Monitor -->
+        <div class="portfolio-card" data-category="embedded hardware" data-aos="fade-up" data-aos-delay="100">
+          <div class="pc-header">
+            <div class="pc-icon"><i class="fas fa-wind"></i></div>
+            <div class="pc-tags">
+              <span class="pc-tag tag-embedded">Embedded</span>
+              <span class="pc-tag tag-hardware">Hardware</span>
+            </div>
+            <span class="pc-status status-completed">Completed</span>
+          </div>
+          <h3 class="pc-title">Gas Monitor</h3>
+          <p class="pc-desc">A portable industrial gas detection device capable of monitoring multiple hazardous gases simultaneously with real-time threshold alerts, data logging, and a ruggedized enclosure for field use.</p>
+          <div class="pc-stack">
+            <span>STM32</span>
+            <span>MQ Sensors</span>
+            <span>OLED Display</span>
+            <span>PCB Design</span>
+            <span>C Firmware</span>
+          </div>
+          <div class="pc-outcome">
+            <i class="fas fa-check-circle"></i>
+            Multi-gas detection with audible &amp; visual alarm under 2s response time
+          </div>
+          <div class="pc-footer">
+            <span class="pc-no-link"><i class="fas fa-lock"></i> Client Project</span>
+          </div>
+        </div>
+
+        <!-- 5. Air Quality Monitor + App -->
+        <div class="portfolio-card" data-category="embedded iot mobile hardware" data-aos="fade-up" data-aos-delay="200">
+          <div class="pc-header">
+            <div class="pc-icon"><i class="fas fa-tint"></i></div>
+            <div class="pc-tags">
+              <span class="pc-tag tag-iot">IoT</span>
+              <span class="pc-tag tag-mobile">Mobile App</span>
+              <span class="pc-tag tag-hardware">Hardware</span>
+            </div>
+            <span class="pc-status status-live">Live</span>
+          </div>
+          <h3 class="pc-title">Air Quality Monitor — Air OTG</h3>
+          <p class="pc-desc">A compact IoT air quality monitoring device paired with a native iOS app. Measures PM2.5, PM10, CO₂, humidity, and temperature — delivering live AQI readings and historical trends on your phone.</p>
+          <div class="pc-stack">
+            <span>BLE</span>
+            <span>PM Sensor</span>
+            <span>PCB Design</span>
+            <span>iOS (Swift)</span>
+            <span>CoreBluetooth</span>
+          </div>
+          <div class="pc-outcome">
+            <i class="fas fa-check-circle"></i>
+            Published on the App Store — live AQI monitoring via BLE companion app
+          </div>
+          <div class="pc-footer">
+            <a href="https://apps.apple.com/mk/app/air-otg/id6749178793" target="_blank" rel="noopener" class="pc-link">
+              <i class="fab fa-app-store-ios"></i> View on App Store
+            </a>
+          </div>
+        </div>
+
+        <!-- 6. CO Leak Detector + App -->
+        <div class="portfolio-card" data-category="embedded iot mobile hardware" data-aos="fade-up" data-aos-delay="300">
+          <div class="pc-header">
+            <div class="pc-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="pc-tags">
+              <span class="pc-tag tag-iot">IoT</span>
+              <span class="pc-tag tag-mobile">Mobile App</span>
+              <span class="pc-tag tag-hardware">Hardware</span>
+            </div>
+            <span class="pc-status status-live">Live</span>
+          </div>
+          <h3 class="pc-title">CO Leak Detector — OTG CO</h3>
+          <p class="pc-desc">A smart carbon monoxide leak detection device with a companion iOS app. Provides real-time CO level readings over BLE, push alert notifications, and safety threshold configuration directly from your phone.</p>
+          <div class="pc-stack">
+            <span>BLE</span>
+            <span>CO Sensor</span>
+            <span>PCB Design</span>
+            <span>iOS (Swift)</span>
+            <span>CoreBluetooth</span>
+          </div>
+          <div class="pc-outcome">
+            <i class="fas fa-check-circle"></i>
+            Published on the App Store — instant CO alerts via BLE with configurable thresholds
+          </div>
+          <div class="pc-footer">
+            <a href="https://apps.apple.com/mk/app/otg-co-leak-detector/id6740924509" target="_blank" rel="noopener" class="pc-link">
+              <i class="fab fa-app-store-ios"></i> View on App Store
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="portfolio-more" data-aos="fade-up">
+        <p><i class="fas fa-layer-group"></i> More projects coming soon — we're always building.</p>
+        <a href="#contact" class="btn btn-outline">Discuss Your Project <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
   <!-- ========== WHY US / CORE VALUES ========== -->
   <section id="why-us" class="values-section section">
     <div class="container">
@@ -631,6 +836,7 @@
             <h4>Company</h4>
             <ul>
               <li><a href="#about">About Us</a></li>
+              <li><a href="#projects">Projects</a></li>
               <li><a href="#why-us">Why Mikronexis</a></li>
               <li><a href="#market">Industries</a></li>
               <li><a href="#products">Products <span class="soon-tag">Soon</span></a></li>
