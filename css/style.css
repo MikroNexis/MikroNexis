@@ -403,14 +403,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   line-height: 1;
 }
 
-.stat-item > span:nth-child(2) {
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--cyan);
-  line-height: 1;
-  display: inline;
-}
-
 .stat-number {
   font-family: 'Poppins', sans-serif;
   font-size: 36px;
