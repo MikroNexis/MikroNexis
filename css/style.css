@@ -389,6 +389,20 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   line-height: 1;
 }
 
+.stat-number-row {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.stat-suffix {
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--cyan);
+  line-height: 1;
+}
+
 .stat-item > span:nth-child(2) {
   font-size: 28px;
   font-weight: 800;
