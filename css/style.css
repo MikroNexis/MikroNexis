@@ -1645,6 +1645,160 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--navy);
 }
 
+/* ---------- ABOUT PROOF STRIP ---------- */
+.about-proof-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+  margin-bottom: 4px;
+}
+
+.proof-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-mid);
+  background: var(--white);
+  border: 1.5px solid var(--bg-dark);
+  border-radius: 50px;
+  padding: 7px 16px;
+  transition: var(--transition);
+}
+
+.proof-item i {
+  color: var(--cyan);
+  font-size: 14px;
+}
+
+.proof-item:hover {
+  border-color: var(--cyan);
+  color: var(--navy);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- SERVICE PROOF LINK ---------- */
+.service-proof {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(0,180,219,0.05);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--cyan);
+}
+
+.service-proof i {
+  color: var(--cyan);
+  flex-shrink: 0;
+}
+
+.service-proof a {
+  color: var(--blue);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: var(--transition);
+}
+
+.service-proof a:hover {
+  color: var(--cyan-dark);
+}
+
+.service-proof-light {
+  background: rgba(0,180,219,0.08);
+  border-left-color: var(--cyan);
+}
+
+.service-card.featured .service-proof {
+  background: rgba(0,180,219,0.12);
+  border-left-color: var(--cyan);
+  color: rgba(255,255,255,0.7);
+}
+
+.service-card.featured .service-proof a {
+  color: var(--cyan);
+}
+
+/* ---------- FEATURED PROJECT CARD ---------- */
+.portfolio-card.portfolio-card-featured {
+  background: linear-gradient(145deg, var(--navy) 0%, var(--navy-light) 100%);
+  border-color: rgba(0,180,219,0.3);
+  color: var(--white);
+}
+
+.portfolio-card.portfolio-card-featured::before {
+  transform: scaleX(1);
+  background: linear-gradient(90deg, var(--cyan), var(--green));
+}
+
+.portfolio-card.portfolio-card-featured .pc-title {
+  color: var(--white);
+}
+
+.portfolio-card.portfolio-card-featured .pc-desc {
+  color: rgba(255,255,255,0.65);
+}
+
+.portfolio-card.portfolio-card-featured .pc-stack span {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.75);
+  border-color: rgba(255,255,255,0.1);
+}
+
+.portfolio-card.portfolio-card-featured .pc-outcome {
+  background: rgba(46,204,113,0.12);
+  color: #5de89a;
+}
+
+.portfolio-card.portfolio-card-featured .pc-no-link {
+  color: rgba(255,255,255,0.45);
+}
+
+.portfolio-card.portfolio-card-featured .pc-link {
+  color: var(--cyan);
+}
+
+.portfolio-card.portfolio-card-featured .pc-link:hover {
+  color: var(--green);
+}
+
+.portfolio-card.portfolio-card-featured .pc-icon {
+  background: linear-gradient(135deg, var(--cyan), var(--green));
+}
+
+/* Safety Critical tag */
+.tag-safety {
+  background: rgba(255, 152, 0, 0.12);
+  color: #e65100;
+}
+
+/* Verified App Store label on featured project cards */
+.pc-verified-label {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  background: rgba(46, 204, 113, 0.18);
+  color: #5de89a;
+  border: 1px solid rgba(46, 204, 113, 0.35);
+  padding: 4px 12px;
+  border-radius: 50px;
+}
+
 /* ============================================================
    RESPONSIVE DESIGN
    ============================================================ */
