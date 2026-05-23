@@ -1,0 +1,2147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mikronexis Cybersecurity for Embedded Devices — EU Cyber Resilience Act (Regulation EU 2024/2847) compliance, EN 18031 Series implementation, secure boot, threat modelling, and full CRA technical file preparation." />
+  <meta name="keywords" content="EU Cyber Resilience Act, CRA compliance, EN 18031, embedded security, secure boot, SBOM, IoT security, cybersecurity embedded, Mikronexis" />
+  <title>Cybersecurity for Embedded Devices — Mikronexis</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Base Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assests/logo_dark.png" />
+
+  <style>
+    /* ============================================================
+       CYBERSECURITY PAGE — Page-Specific Styles
+       Primary: --cyber: #00B4DB (cyan)
+       Secondary: --electric: #2ECC71 (green)
+       Alert: --red: #EF4444
+    ============================================================ */
+    :root {
+      --cyber:         #00B4DB;
+      --cyber-dark:    #0090B0;
+      --cyber-dim:     rgba(0,180,219,0.08);
+      --cyber-border:  rgba(0,180,219,0.25);
+      --electric:      #2ECC71;
+      --electric-dim:  rgba(46,204,113,0.08);
+      --red-alert:     #EF4444;
+      --red-dim:       rgba(239,68,68,0.08);
+      --mono:          'JetBrains Mono', monospace;
+    }
+
+    /* ---- PRELOADER ---- */
+    #cy-preloader {
+      position: fixed; inset: 0;
+      background: var(--navy);
+      z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    #cy-preloader.hidden { opacity: 0; visibility: hidden; }
+
+    /* ---- HERO ---- */
+    .cy-hero {
+      min-height: 100vh;
+      background: var(--navy);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 140px 0 100px;
+    }
+
+    /* Animated scan lines */
+    .cy-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,180,219,0.015) 2px,
+        rgba(0,180,219,0.015) 4px
+      );
+      pointer-events: none;
+      animation: scanMove 8s linear infinite;
+    }
+    @keyframes scanMove { from { background-position: 0 0; } to { background-position: 0 100px; } }
+
+    .cy-hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,180,219,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,180,219,0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+
+    .cy-hero-glow-r {
+      position: absolute; top: -150px; right: -150px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(0,180,219,0.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cy-hero-glow-l {
+      position: absolute; bottom: -150px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(46,204,113,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .cy-hero-layout {
+      position: relative; z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .cy-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0,180,219,0.1);
+      border: 1px solid rgba(0,180,219,0.35);
+      color: var(--cyber);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 18px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .cy-hero-badge .blink {
+      width: 7px; height: 7px;
+      background: var(--cyber);
+      border-radius: 50%;
+      animation: blink 1.2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.2; }
+    }
+
+    .cy-hero-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .cy-hero-title .cyber-text {
+      background: linear-gradient(135deg, var(--cyber) 0%, #7dd3fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cy-hero-title .enforce-text {
+      background: linear-gradient(135deg, var(--electric) 0%, #86efac 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cy-hero-subtitle {
+      color: rgba(255,255,255,0.65);
+      font-size: clamp(14px, 1.8vw, 17px);
+      line-height: 1.8;
+      margin-bottom: 36px;
+      max-width: 580px;
+    }
+
+    .cy-deadline-strip {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.25);
+      border-left: 3px solid var(--red-alert);
+      border-radius: var(--radius-md);
+      padding: 14px 20px;
+      margin-bottom: 32px;
+    }
+
+    .cy-deadline-icon {
+      width: 36px; height: 36px;
+      background: var(--red-dim);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--red-alert);
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .cy-deadline-text { flex: 1; }
+    .cy-deadline-text strong { font-size: 13px; font-weight: 700; color: #f87171; display: block; margin-bottom: 2px; }
+    .cy-deadline-text span { font-size: 12px; color: rgba(255,255,255,0.55); }
+
+    .cy-hero-certs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+
+    .cy-cert-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.75);
+      font-size: 12px; font-weight: 600;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+    }
+    .cy-cert-chip i { color: var(--cyber); }
+
+    .cy-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .btn-cyber {
+      background: linear-gradient(135deg, var(--cyber), var(--cyber-dark));
+      color: var(--navy);
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(0,180,219,0.35);
+    }
+    .btn-cyber:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,180,219,0.55);
+    }
+
+    /* ---- HERO RIGHT: Terminal visual ---- */
+    .cy-terminal {
+      background: rgba(5,15,25,0.95);
+      border: 1px solid rgba(0,180,219,0.3);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 80px rgba(0,180,219,0.12);
+    }
+
+    .cy-terminal-bar {
+      background: rgba(0,180,219,0.08);
+      border-bottom: 1px solid rgba(0,180,219,0.15);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cy-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .cy-dot.red   { background: #f87171; }
+    .cy-dot.amber { background: #fbbf24; }
+    .cy-dot.green { background: var(--electric); }
+
+    .cy-terminal-title {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(0,180,219,0.6);
+      letter-spacing: 1px;
+    }
+
+    .cy-terminal-body {
+      padding: 20px 22px;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .cy-line { display: flex; gap: 10px; }
+    .cy-line .prompt { color: var(--electric); user-select: none; }
+    .cy-line .cmd    { color: var(--cyber); }
+    .cy-line .output { color: rgba(255,255,255,0.6); }
+    .cy-line .ok     { color: var(--electric); }
+    .cy-line .warn   { color: #fbbf24; }
+    .cy-line .fail   { color: var(--red-alert); }
+    .cy-line .dim    { color: rgba(255,255,255,0.25); }
+    .cy-line.indent  { padding-left: 24px; }
+
+    .cy-terminal-cursor {
+      display: inline-block;
+      width: 8px; height: 14px;
+      background: var(--cyber);
+      animation: cursorBlink 1s step-end infinite;
+      vertical-align: middle;
+    }
+    @keyframes cursorBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* ---- STATS BAR ---- */
+    .cy-stats-bar {
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(0,180,219,0.12);
+      border-bottom: 1px solid rgba(0,180,219,0.12);
+      padding: 32px 0;
+    }
+
+    .cy-stats-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      divide: var(--navy-light);
+    }
+
+    .cy-stat {
+      text-align: center;
+      padding: 0 24px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .cy-stat:last-child { border-right: none; }
+
+    .cy-stat-num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--cyber);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .cy-stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.5px;
+    }
+
+    /* ---- WHAT IS CRA ---- */
+    .cy-what-section {
+      background: var(--white);
+      padding: 100px 0;
+    }
+
+    .cy-what-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .cy-what-lead {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 18px;
+    }
+
+    .cy-what-body {
+      font-size: 15px;
+      color: var(--text-light);
+      line-height: 1.85;
+      margin-bottom: 28px;
+    }
+
+    .cy-enforced-banner {
+      background: linear-gradient(135deg, rgba(0,180,219,0.05), rgba(46,204,113,0.05));
+      border: 1.5px solid rgba(0,180,219,0.2);
+      border-radius: var(--radius-md);
+      padding: 20px 22px;
+      margin-bottom: 28px;
+    }
+    .cy-enforced-banner h4 {
+      font-size: 13px; font-weight: 700;
+      color: var(--cyber-dark); margin-bottom: 6px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .cy-enforced-banner p { font-size: 13px; color: var(--text-light); line-height: 1.65; }
+
+    .cy-what-points {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+
+    .cy-what-point {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 15px 18px;
+      background: var(--bg);
+      border-radius: var(--radius-md);
+      border-left: 3px solid var(--cyber);
+    }
+
+    .cy-what-point .wp-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--cyber), var(--cyber-dark));
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-size: 14px;
+    }
+
+    .cy-what-point h4 { font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+    .cy-what-point p  { font-size: 12px; color: var(--text-light); line-height: 1.6; }
+
+    /* Right: Timeline */
+    .cy-timeline {
+      background: linear-gradient(145deg, var(--navy), var(--navy-light));
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      border: 1px solid rgba(0,180,219,0.2);
+      box-shadow: 0 20px 60px rgba(10,27,46,0.25);
+    }
+
+    .cy-timeline-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px; font-weight: 700;
+      color: var(--cyber); text-transform: uppercase; letter-spacing: 1.5px;
+      margin-bottom: 32px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .cy-tl-items { display: flex; flex-direction: column; gap: 0; position: relative; }
+
+    .cy-tl-items::before {
+      content: '';
+      position: absolute;
+      left: 18px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--cyber), var(--electric));
+    }
+
+    .cy-tl-item {
+      display: flex; gap: 20px; align-items: flex-start;
+      padding-bottom: 26px;
+      position: relative;
+    }
+
+    .cy-tl-item:last-child { padding-bottom: 0; }
+
+    .cy-tl-dot {
+      width: 38px; height: 38px; flex-shrink: 0;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800;
+      position: relative; z-index: 1;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .cy-tl-dot.past   { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); border: 2px solid rgba(255,255,255,0.1); }
+    .cy-tl-dot.done   { background: rgba(0,180,219,0.15); color: var(--cyber); border: 2px solid rgba(0,180,219,0.4); }
+    .cy-tl-dot.near   { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: var(--navy); border: none; animation: nearPulse 2s ease-in-out infinite; }
+    .cy-tl-dot.enforce { background: linear-gradient(135deg, var(--red-alert), #dc2626); color: var(--white); border: none; animation: nearPulse 1.5s ease-in-out infinite; }
+
+    @keyframes nearPulse { 0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,0.3);} 50%{box-shadow:0 0 0 8px rgba(239,68,68,0);} }
+
+    .cy-tl-content { padding-top: 4px; }
+    .cy-tl-date { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.35); margin-bottom: 3px; }
+    .cy-tl-heading { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .cy-tl-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.55; }
+
+    .cy-tl-item .cy-tl-pill {
+      display: inline-block; margin-top: 6px;
+      font-size: 10px; font-weight: 700; padding: 2px 10px;
+      border-radius: 50px; letter-spacing: 0.5px;
+    }
+    .pill-done    { background: rgba(0,180,219,0.15); color: var(--cyber); }
+    .pill-near    { background: rgba(251,191,36,0.15); color: #fbbf24; }
+    .pill-enforce { background: rgba(239,68,68,0.15); color: #f87171; }
+    .pill-past    { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.3); }
+
+    /* ---- PRODUCT CLASSES ---- */
+    .cy-classes-section {
+      background: var(--bg);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cy-classes-section::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--cyber), var(--electric), var(--cyber));
+    }
+
+    .cy-classes-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .cy-class-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1.5px solid var(--bg-dark);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .cy-class-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+
+    .cy-class-header {
+      padding: 28px 24px 20px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cy-class-header::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    }
+
+    .cy-class-card.cls-default .cy-class-header::after { background: rgba(255,255,255,0.2); }
+    .cy-class-card.cls-1       .cy-class-header::after { background: var(--cyber); }
+    .cy-class-card.cls-2       .cy-class-header::after { background: #fbbf24; }
+    .cy-class-card.cls-critical .cy-class-header::after { background: var(--red-alert); }
+
+    .cy-class-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+
+    .cy-class-card.cls-default  .cy-class-label { color: rgba(255,255,255,0.4); }
+    .cy-class-card.cls-1        .cy-class-label { color: var(--cyber); }
+    .cy-class-card.cls-2        .cy-class-label { color: #fbbf24; }
+    .cy-class-card.cls-critical .cy-class-label { color: #f87171; }
+
+    .cy-class-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px; font-weight: 800; color: var(--white);
+    }
+
+    .cy-class-assess {
+      font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 4px;
+    }
+
+    .cy-class-body { padding: 22px 24px; }
+    .cy-class-desc { font-size: 13px; color: var(--text-light); line-height: 1.65; margin-bottom: 16px; }
+
+    .cy-class-examples {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+
+    .cy-class-ex {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: var(--text-mid);
+    }
+
+    .cy-class-ex i { font-size: 9px; }
+    .cy-class-card.cls-default  .cy-class-ex i { color: rgba(255,255,255,0.3); }
+    .cy-class-card.cls-1        .cy-class-ex i { color: var(--cyber); }
+    .cy-class-card.cls-2        .cy-class-ex i { color: #fbbf24; }
+    .cy-class-card.cls-critical .cy-class-ex i { color: var(--red-alert); }
+
+    /* ---- STANDARDS SECTION ---- */
+    .cy-standards-section {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cy-standards-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,180,219,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,180,219,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+
+    .cy-standards-section .section-title { color: var(--white); }
+    .cy-standards-section .section-sub   { color: rgba(255,255,255,0.6); }
+
+    .cy-std-blocks { display: flex; flex-direction: column; gap: 36px; }
+
+    .cy-std-block {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,180,219,0.18);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .cy-std-block:hover {
+      background: rgba(0,180,219,0.04);
+      border-color: rgba(0,180,219,0.35);
+    }
+
+    .cy-std-block-header {
+      padding: 36px 40px;
+      border-bottom: 1px solid rgba(0,180,219,0.15);
+      display: flex; align-items: center; gap: 24px;
+    }
+
+    .cy-std-block-icon {
+      width: 70px; height: 70px;
+      background: linear-gradient(135deg, var(--cyber), var(--cyber-dark));
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; color: var(--navy); flex-shrink: 0;
+    }
+
+    .cy-std-block-meta { flex: 1; }
+    .cy-std-block-number { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--cyber); text-transform: uppercase; margin-bottom: 5px; }
+    .cy-std-block-name   { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 800; color: var(--white); margin-bottom: 5px; }
+    .cy-std-block-scope  { font-size: 14px; color: rgba(255,255,255,0.55); }
+
+    .cy-std-block-badge {
+      background: rgba(0,180,219,0.15);
+      border: 1px solid rgba(0,180,219,0.3);
+      color: var(--cyber);
+      font-size: 12px; font-weight: 700;
+      padding: 6px 18px; border-radius: 50px;
+      white-space: nowrap;
+    }
+
+    .cy-std-block-body { padding: 36px 40px; }
+
+    .cy-std-block-desc {
+      font-size: 15px; color: rgba(255,255,255,0.65);
+      line-height: 1.8; margin-bottom: 32px;
+    }
+
+    .cy-std-block-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+    }
+
+    .cy-std-item {
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      border-left: 3px solid rgba(0,180,219,0.4);
+      transition: var(--transition);
+    }
+
+    .cy-std-item:hover {
+      background: rgba(0,180,219,0.06);
+      border-left-color: var(--cyber);
+      transform: translateX(4px);
+    }
+
+    .cy-std-item-icon {
+      width: 36px; height: 36px;
+      background: rgba(0,180,219,0.1);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--cyber); font-size: 15px; margin-bottom: 12px;
+    }
+
+    .cy-std-item h4 { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 5px; }
+    .cy-std-item p  { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+    /* CRA requirement table */
+    .cy-req-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0;
+    }
+
+    .cy-req-table th {
+      background: rgba(0,180,219,0.1);
+      color: var(--cyber);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 12px 18px; text-align: left;
+      border-bottom: 1px solid rgba(0,180,219,0.2);
+    }
+
+    .cy-req-table td {
+      padding: 14px 18px;
+      font-size: 13px; color: rgba(255,255,255,0.65);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    .cy-req-table tr:last-child td { border-bottom: none; }
+    .cy-req-table tr:hover td { background: rgba(0,180,219,0.03); }
+
+    .cy-req-table td:first-child { font-weight: 600; color: rgba(255,255,255,0.85); white-space: nowrap; }
+
+    .cy-req-badge {
+      display: inline-block;
+      font-size: 10px; font-weight: 700;
+      padding: 2px 10px; border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+    .req-mandatory { background: rgba(239,68,68,0.15); color: #f87171; }
+    .req-technical  { background: rgba(0,180,219,0.15); color: var(--cyber); }
+    .req-process    { background: rgba(46,204,113,0.15); color: var(--electric); }
+
+    /* ---- PROCESS SECTION ---- */
+    .cy-process-section {
+      background: var(--white);
+      padding: 100px 0;
+    }
+
+    .cy-process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .cy-process-card {
+      background: var(--bg);
+      border: 1.5px solid var(--bg-dark);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      position: relative;
+      transition: var(--transition);
+      overflow: hidden;
+    }
+
+    .cy-process-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--cyber), var(--electric));
+      transform: scaleX(0);
+      transition: var(--transition);
+    }
+
+    .cy-process-card:hover {
+      background: var(--white);
+      border-color: transparent;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-6px);
+    }
+
+    .cy-process-card:hover::after { transform: scaleX(1); }
+
+    .cy-process-step-num {
+      position: absolute; top: 20px; right: 22px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 52px; font-weight: 800;
+      color: rgba(0,180,219,0.06); line-height: 1;
+    }
+
+    .cy-process-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--cyber), var(--cyber-dark));
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 21px; color: var(--navy);
+      margin-bottom: 20px;
+    }
+
+    .cy-process-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px; font-weight: 700;
+      color: var(--text-dark); margin-bottom: 10px;
+    }
+
+    .cy-process-card p {
+      font-size: 13px; color: var(--text-light); line-height: 1.7; margin-bottom: 16px;
+    }
+
+    .cy-process-outputs { display: flex; flex-direction: column; gap: 6px; }
+
+    .cy-process-output {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: var(--text-light);
+    }
+
+    .cy-process-output i { color: var(--cyber); font-size: 10px; }
+
+    /* ---- INDUSTRIES ---- */
+    .cy-industries-section {
+      background: var(--bg);
+      padding: 100px 0;
+    }
+
+    .cy-industries-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+
+    .cy-industry-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      border: 1.5px solid var(--bg-dark);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cy-industry-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--cyber), var(--electric));
+      transform: scaleX(0);
+      transition: var(--transition);
+    }
+
+    .cy-industry-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+
+    .cy-industry-card:hover::before { transform: scaleX(1); }
+
+    .cy-industry-icon {
+      width: 58px; height: 58px;
+      background: var(--cyber-dim);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; color: var(--cyber);
+      margin-bottom: 20px;
+      transition: var(--transition);
+    }
+
+    .cy-industry-card:hover .cy-industry-icon {
+      background: linear-gradient(135deg, var(--cyber), var(--cyber-dark));
+      color: var(--white);
+    }
+
+    .cy-industry-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px; font-weight: 700;
+      color: var(--text-dark); margin-bottom: 8px;
+    }
+
+    .cy-industry-card p {
+      font-size: 13px; color: var(--text-light); line-height: 1.7; margin-bottom: 14px;
+    }
+
+    .cy-industry-reqs {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+
+    .cy-req-pill {
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 50px;
+      background: var(--cyber-dim);
+      color: var(--cyber-dark);
+      border: 1px solid var(--cyber-border);
+    }
+
+    /* ---- PROOF SECTION ---- */
+    .cy-proof-section {
+      background: linear-gradient(135deg, var(--navy) 0%, #07182e 100%);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cy-proof-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,180,219,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,180,219,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+
+    .cy-proof-inner {
+      position: relative; z-index: 1;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(0,180,219,0.2);
+      border-radius: var(--radius-xl);
+      padding: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .cy-proof-tag {
+      color: var(--cyber); font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .cy-proof-tag::before { content: ''; display: block; width: 12px; height: 2px; background: var(--cyber); }
+
+    .cy-proof-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 28px; font-weight: 800;
+      color: var(--white); line-height: 1.2; margin-bottom: 14px;
+    }
+
+    .cy-proof-desc {
+      font-size: 15px; color: rgba(255,255,255,0.6);
+      line-height: 1.8; margin-bottom: 24px;
+    }
+
+    .cy-proof-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+
+    .cy-proof-chip {
+      font-size: 12px; font-weight: 600;
+      padding: 5px 14px; border-radius: 50px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.65);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .cy-proof-chip.cyber-chip {
+      background: rgba(0,180,219,0.12);
+      color: var(--cyber);
+      border-color: rgba(0,180,219,0.25);
+    }
+
+    .cy-proof-outcomes { display: flex; flex-direction: column; gap: 10px; }
+
+    .cy-proof-outcome-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 16px;
+      background: rgba(46,204,113,0.07);
+      border-radius: var(--radius-md);
+      border-left: 3px solid var(--electric);
+    }
+
+    .cy-proof-outcome-item i { color: var(--electric); margin-top: 2px; flex-shrink: 0; }
+    .cy-proof-outcome-item span {
+      font-size: 13px; color: rgba(255,255,255,0.7);
+      font-weight: 500; line-height: 1.5;
+    }
+
+    /* Right — threat dashboard */
+    .cy-threat-dashboard {
+      background: rgba(5,15,25,0.9);
+      border: 1px solid rgba(0,180,219,0.25);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    .cy-threat-header {
+      background: rgba(0,180,219,0.08);
+      border-bottom: 1px solid rgba(0,180,219,0.15);
+      padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .cy-threat-title {
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 600;
+      color: var(--cyber); letter-spacing: 1px;
+    }
+
+    .cy-threat-status {
+      display: flex; align-items: center; gap: 6px;
+      font-family: var(--mono); font-size: 10px; color: var(--electric);
+    }
+
+    .cy-threat-status .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--electric);
+      animation: blink 1.2s ease-in-out infinite;
+    }
+
+    .cy-threat-body { padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+
+    .cy-threat-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid transparent;
+      transition: var(--transition);
+    }
+
+    .cy-threat-item.mitigated  { border-left-color: var(--electric); }
+    .cy-threat-item.partial    { border-left-color: #fbbf24; }
+    .cy-threat-item.flagged    { border-left-color: var(--red-alert); animation: flagPulse 2s ease-in-out infinite; }
+
+    @keyframes flagPulse {
+      0%,100%{background:rgba(255,255,255,0.03);} 50%{background:rgba(239,68,68,0.06);}
+    }
+
+    .cy-threat-icon { font-size: 16px; width: 22px; text-align: center; flex-shrink: 0; }
+    .cy-threat-item.mitigated .cy-threat-icon { color: var(--electric); }
+    .cy-threat-item.partial   .cy-threat-icon { color: #fbbf24; }
+    .cy-threat-item.flagged   .cy-threat-icon { color: var(--red-alert); }
+
+    .cy-threat-info { flex: 1; }
+    .cy-threat-name { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8); margin-bottom: 2px; }
+    .cy-threat-sub  { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.35); }
+
+    .cy-threat-badge {
+      font-family: var(--mono);
+      font-size: 10px; font-weight: 700;
+      padding: 2px 10px; border-radius: 4px;
+      white-space: nowrap;
+    }
+    .cy-threat-item.mitigated .cy-threat-badge { background: rgba(46,204,113,0.15); color: var(--electric); }
+    .cy-threat-item.partial   .cy-threat-badge { background: rgba(251,191,36,0.15); color: #fbbf24; }
+    .cy-threat-item.flagged   .cy-threat-badge { background: rgba(239,68,68,0.15); color: #f87171; }
+
+    /* ---- FAQ ---- */
+    .cy-faq-section { background: var(--white); padding: 100px 0; }
+
+    .cy-faq-grid {
+      max-width: 800px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+
+    .cy-faq-item {
+      background: var(--bg);
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--bg-dark);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .cy-faq-item.open {
+      border-color: var(--cyber-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .cy-faq-question {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
+      padding: 20px 22px; cursor: pointer;
+      background: none; font-family: var(--font-main); text-align: left;
+    }
+
+    .cy-faq-question span { font-size: 15px; font-weight: 600; color: var(--text-dark); line-height: 1.4; }
+
+    .cy-faq-icon {
+      width: 32px; height: 32px;
+      background: var(--bg-dark); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-light); font-size: 14px; flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .cy-faq-item.open .cy-faq-icon {
+      background: var(--cyber); color: var(--navy); transform: rotate(45deg);
+    }
+
+    .cy-faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .cy-faq-item.open .cy-faq-answer { max-height: 600px; }
+
+    .cy-faq-answer-inner {
+      padding: 0 22px 22px;
+      font-size: 14px; color: var(--text-light);
+      line-height: 1.8;
+      border-top: 1px solid var(--bg-dark); padding-top: 16px;
+    }
+
+    .cy-faq-answer-inner strong { color: var(--text-dark); }
+    .cy-faq-answer-inner a { color: var(--cyber-dark); text-decoration: underline; }
+
+    /* ---- CTA ---- */
+    .cy-cta-section {
+      background: linear-gradient(135deg, var(--navy) 0%, #051525 100%);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cy-cta-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,180,219,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,180,219,0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    .cy-cta-inner {
+      position: relative; z-index: 1;
+      text-align: center; max-width: 700px; margin: 0 auto;
+    }
+
+    .cy-cta-inner .section-title { color: var(--white); }
+
+    .cy-cta-desc {
+      font-size: 17px; color: rgba(255,255,255,0.6);
+      line-height: 1.75; margin-bottom: 40px;
+    }
+
+    .cy-deadline-notice {
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: var(--radius-md);
+      padding: 18px 24px;
+      margin-bottom: 40px;
+      text-align: left;
+      display: flex; gap: 16px; align-items: center;
+    }
+
+    .cy-deadline-notice i { color: var(--red-alert); font-size: 24px; flex-shrink: 0; }
+    .cy-deadline-notice div { flex: 1; }
+    .cy-deadline-notice strong { font-size: 14px; font-weight: 700; color: #f87171; display: block; margin-bottom: 4px; }
+    .cy-deadline-notice span  { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.55; }
+
+    .cy-cta-features {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px;
+    }
+
+    .cy-cta-feat {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50px; padding: 7px 16px;
+      font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.75);
+    }
+
+    .cy-cta-feat i { color: var(--cyber); }
+
+    .cy-cta-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+    .btn-outline-cyber {
+      background: transparent;
+      color: var(--cyber);
+      border: 2px solid rgba(0,180,219,0.4);
+    }
+    .btn-outline-cyber:hover {
+      background: rgba(0,180,219,0.08);
+      border-color: var(--cyber);
+      transform: translateY(-3px);
+    }
+
+    /* ---- FOOTER BAR ---- */
+    .cy-footer-bar {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 28px 24px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+
+    .cy-footer-left { display: flex; align-items: center; gap: 12px; }
+    .cy-footer-logo { height: 28px; }
+    .cy-footer-sep { width: 1px; height: 20px; background: rgba(255,255,255,0.12); }
+    .cy-footer-text { font-size: 13px; color: rgba(255,255,255,0.4); }
+
+    .cy-footer-link {
+      font-size: 13px; font-weight: 600;
+      color: var(--cyan);
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: var(--transition);
+    }
+    .cy-footer-link:hover { color: var(--cyber); }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 1100px) {
+      .cy-hero-layout { grid-template-columns: 1fr; }
+      .cy-terminal { display: none; }
+      .cy-classes-grid { grid-template-columns: repeat(2, 1fr); }
+      .cy-industries-grid { grid-template-columns: repeat(2, 1fr); }
+      .cy-what-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    @media (max-width: 768px) {
+      .cy-hero { padding: 120px 0 80px; }
+      .cy-process-grid { grid-template-columns: 1fr; }
+      .cy-stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .cy-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 20px; }
+      .cy-stat:nth-child(even) { border-right: none; }
+      .cy-std-block-grid { grid-template-columns: 1fr !important; }
+      .cy-std-block-header { flex-direction: column; align-items: flex-start; }
+      .cy-std-block-body { padding: 24px; }
+      .cy-std-block-header { padding: 24px; }
+      .cy-proof-inner { grid-template-columns: 1fr; padding: 32px 24px; }
+      .cy-classes-grid { grid-template-columns: 1fr; }
+      .cy-req-table { font-size: 12px; }
+      .cy-req-table td, .cy-req-table th { padding: 10px 12px; }
+    }
+
+    @media (max-width: 480px) {
+      .cy-hero-title { font-size: 32px; }
+      .cy-industries-grid { grid-template-columns: 1fr; }
+      .cy-stats-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== PRELOADER ========== -->
+  <div id="cy-preloader">
+    <div class="preloader-inner">
+      <img src="assests/logo_dark.png" alt="Mikronexis" class="preloader-logo" />
+      <div class="preloader-bar"><span></span></div>
+    </div>
+  </div>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="assests/logo_dark.png" alt="Mikronexis Logo" class="logo-img" />
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#home" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="index.html#services" class="nav-link">Services</a></li>
+        <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+        <li><a href="index.html#why-us" class="nav-link">Why Us</a></li>
+        <li><a href="index.html#market" class="nav-link">Industries</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        <li><a href="index.html#contact" class="nav-cta-btn">Get Started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="cy-hero">
+    <div class="cy-hero-grid"></div>
+    <div class="cy-hero-glow-r"></div>
+    <div class="cy-hero-glow-l"></div>
+
+    <div class="container">
+      <div class="cy-hero-layout">
+
+        <!-- LEFT -->
+        <div>
+          <div class="cy-hero-badge">
+            <span class="blink"></span>
+            Cyber Resilience Act Compliance
+          </div>
+
+          <h1 class="cy-hero-title">
+            <span class="cyber-text">Cybersecurity</span> for<br />
+            Embedded Devices.<br />
+            <span class="enforce-text">CRA Enforced</span> Oct 2027.
+          </h1>
+
+          <p class="cy-hero-subtitle">
+            The EU Cyber Resilience Act (Regulation (EU) 2024/2847) mandates security requirements for every
+            connected product sold in the EU. Mikronexis helps embedded product companies achieve compliance —
+            from gap assessment through to complete CRA technical file.
+          </p>
+
+          <!-- Deadline alert -->
+          <div class="cy-deadline-strip">
+            <div class="cy-deadline-icon"><i class="fas fa-clock"></i></div>
+            <div class="cy-deadline-text">
+              <strong>Full Enforcement: October 2027 — Reporting obligations active September 2026</strong>
+              <span>Products placed on the EU market after October 2027 must be fully CRA compliant. Non-compliant products cannot bear CE marking.</span>
+            </div>
+          </div>
+
+          <div class="cy-hero-certs">
+            <div class="cy-cert-chip"><i class="fas fa-scale-balanced"></i> Reg. (EU) 2024/2847</div>
+            <div class="cy-cert-chip"><i class="fas fa-file-shield"></i> EN 18031 Series</div>
+            <div class="cy-cert-chip"><i class="fas fa-lock"></i> Secure Boot & Code Signing</div>
+            <div class="cy-cert-chip"><i class="fas fa-list-check"></i> SBOM Ready</div>
+            <div class="cy-cert-chip"><i class="fas fa-magnifying-glass-chart"></i> Threat Modelling</div>
+          </div>
+
+          <div class="cy-hero-actions">
+            <a href="index.html#contact" class="btn btn-cyber">
+              Start CRA Assessment <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="#cy-standards" class="btn btn-outline">
+              View Standards <i class="fas fa-book-open"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT — Terminal -->
+        <div>
+          <div class="cy-terminal" data-aos="fade-left">
+            <div class="cy-terminal-bar">
+              <div class="cy-dot red"></div>
+              <div class="cy-dot amber"></div>
+              <div class="cy-dot green"></div>
+              <div class="cy-terminal-title">mikronexis-cra-audit v2.4.1</div>
+            </div>
+            <div class="cy-terminal-body">
+              <div class="cy-line"><span class="prompt">$</span><span class="cmd"> cra-audit --product embedded-iot --standard EN18031</span></div>
+              <div class="cy-line"><span class="output">  Initialising CRA compliance scan...</span></div>
+              <div class="cy-line"><span class="dim">  ─────────────────────────────────────</span></div>
+              <div class="cy-line"><span class="output">  [01] Secure boot chain</span><span class="ok">   ✓ PASS</span></div>
+              <div class="cy-line"><span class="output">  [02] Code signing verification</span><span class="ok">  ✓ PASS</span></div>
+              <div class="cy-line"><span class="output">  [03] OTA update integrity</span><span class="ok">   ✓ PASS</span></div>
+              <div class="cy-line"><span class="output">  [04] Key storage (hardware)</span><span class="warn">  ⚠ REVIEW</span></div>
+              <div class="cy-line"><span class="output">  [05] Vulnerability disclosure proc.</span><span class="ok"> ✓ PASS</span></div>
+              <div class="cy-line"><span class="output">  [06] SBOM generation</span><span class="ok">         ✓ PASS</span></div>
+              <div class="cy-line"><span class="output">  [07] Network attack surface</span><span class="ok">  ✓ PASS</span></div>
+              <div class="cy-line"><span class="output">  [08] Default credentials check</span><span class="ok">  ✓ PASS</span></div>
+              <div class="cy-line"><span class="output">  [09] Security update lifetime (5yr)</span><span class="ok"> ✓ PASS</span></div>
+              <div class="cy-line"><span class="output">  [10] Incident reporting (24hr)</span><span class="ok">  ✓ PASS</span></div>
+              <div class="cy-line"><span class="dim">  ─────────────────────────────────────</span></div>
+              <div class="cy-line"><span class="output">  Score: </span><span class="ok">97/100</span><span class="output"> — CRA Class I Ready</span></div>
+              <div class="cy-line"><span class="output">  Status: </span><span class="ok">COMPLIANT</span><span class="dim"> — CE marking eligible</span></div>
+              <div class="cy-line"><span class="dim">  ─────────────────────────────────────</span></div>
+              <div class="cy-line"><span class="prompt">$</span><span class="dim"> </span><span class="cy-terminal-cursor"></span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STATS BAR ========== -->
+  <div class="cy-stats-bar">
+    <div class="container">
+      <div class="cy-stats-inner">
+        <div class="cy-stat">
+          <div class="cy-stat-num">Oct '27</div>
+          <div class="cy-stat-label">CRA full enforcement deadline</div>
+        </div>
+        <div class="cy-stat">
+          <div class="cy-stat-num">24 hrs</div>
+          <div class="cy-stat-label">Max incident reporting window to ENISA</div>
+        </div>
+        <div class="cy-stat">
+          <div class="cy-stat-num">5 yrs</div>
+          <div class="cy-stat-label">Minimum security update support period</div>
+        </div>
+        <div class="cy-stat">
+          <div class="cy-stat-num">4</div>
+          <div class="cy-stat-label">CRA product risk classifications</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== WHAT IS CRA ========== -->
+  <section class="cy-what-section">
+    <div class="container">
+      <div class="cy-what-grid">
+
+        <div data-aos="fade-right">
+          <div class="section-tag">The Regulation</div>
+          <h2 class="section-title">What Is the EU Cyber Resilience Act?</h2>
+          <p class="cy-what-lead">
+            The Cyber Resilience Act (Regulation (EU) 2024/2847) is the EU's first mandatory cybersecurity
+            law covering all "products with digital elements" — hardware and software with intended or
+            foreseeable network connectivity.
+          </p>
+          <p class="cy-what-body">
+            Unlike voluntary frameworks, the CRA is a legal obligation. It establishes essential security
+            requirements that must be met before placing a product on the EU market. Non-compliant products
+            cannot obtain CE marking — meaning they cannot be legally sold in any EU member state.
+            It also introduces ongoing obligations: manufacturers must actively manage vulnerabilities,
+            maintain a Software Bill of Materials (SBOM), and report actively exploited incidents to ENISA
+            within 24 hours of discovery.
+          </p>
+
+          <div class="cy-enforced-banner">
+            <h4><i class="fas fa-flag"></i> Who this applies to</h4>
+            <p>Any manufacturer, importer, or distributor placing a connected product on the EU market — including IoT devices, embedded controllers, industrial equipment, consumer electronics, and software products. If it connects to a network, the CRA likely applies.</p>
+          </div>
+
+          <div class="cy-what-points">
+            <div class="cy-what-point">
+              <div class="wp-icon"><i class="fas fa-shield-halved"></i></div>
+              <div>
+                <h4>Security by Design and Default</h4>
+                <p>Products must be designed with security as a core requirement — not added retrospectively. Default configurations must be secure out of the box.</p>
+              </div>
+            </div>
+            <div class="cy-what-point">
+              <div class="wp-icon"><i class="fas fa-eye"></i></div>
+              <div>
+                <h4>Vulnerability Lifecycle Management</h4>
+                <p>Manufacturers must have coordinated vulnerability disclosure processes and deliver security updates for the expected product lifetime (minimum 5 years).</p>
+              </div>
+            </div>
+            <div class="cy-what-point">
+              <div class="wp-icon"><i class="fas fa-file-invoice"></i></div>
+              <div>
+                <h4>SBOM & Technical Documentation</h4>
+                <p>A Software Bill of Materials must be maintained. Full technical documentation covering security architecture, threat model, and test evidence is required for conformity assessment.</p>
+              </div>
+            </div>
+            <div class="cy-what-point">
+              <div class="wp-icon"><i class="fas fa-triangle-exclamation"></i></div>
+              <div>
+                <h4>Incident Reporting to ENISA</h4>
+                <p>Actively exploited vulnerabilities must be reported to ENISA within 24 hours of awareness, with a full report within 72 hours.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline -->
+        <div data-aos="fade-left">
+          <div class="cy-timeline">
+            <div class="cy-timeline-title">
+              <i class="fas fa-timeline"></i> CRA Enforcement Timeline
+            </div>
+            <div class="cy-tl-items">
+              <div class="cy-tl-item">
+                <div class="cy-tl-dot past">✓</div>
+                <div class="cy-tl-content">
+                  <div class="cy-tl-date">November 2024</div>
+                  <div class="cy-tl-heading">CRA Published — Official Journal of EU</div>
+                  <div class="cy-tl-desc">Regulation (EU) 2024/2847 formally published. The clock to compliance starts now.</div>
+                  <span class="cy-tl-pill pill-past">PUBLISHED</span>
+                </div>
+              </div>
+              <div class="cy-tl-item">
+                <div class="cy-tl-dot done">✓</div>
+                <div class="cy-tl-content">
+                  <div class="cy-tl-date">December 2024</div>
+                  <div class="cy-tl-heading">CRA Entered Into Force</div>
+                  <div class="cy-tl-desc">Regulation legally in force across all EU member states. Transition period begins.</div>
+                  <span class="cy-tl-pill pill-done">IN FORCE</span>
+                </div>
+              </div>
+              <div class="cy-tl-item">
+                <div class="cy-tl-dot near">!</div>
+                <div class="cy-tl-content">
+                  <div class="cy-tl-date">September 2026</div>
+                  <div class="cy-tl-heading">Reporting Obligations Active</div>
+                  <div class="cy-tl-desc">Incident reporting and vulnerability notification to ENISA becomes mandatory for all manufacturers.</div>
+                  <span class="cy-tl-pill pill-near">14 MONTHS AWAY</span>
+                </div>
+              </div>
+              <div class="cy-tl-item">
+                <div class="cy-tl-dot enforce">!</div>
+                <div class="cy-tl-content">
+                  <div class="cy-tl-date">October 2027</div>
+                  <div class="cy-tl-heading">Full CRA Enforcement</div>
+                  <div class="cy-tl-desc">All products placed on the EU market must be CRA compliant. No CE marking without compliance. Market surveillance authorities begin enforcement.</div>
+                  <span class="cy-tl-pill pill-enforce">HARD DEADLINE</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PRODUCT CLASSIFICATIONS ========== -->
+  <section class="cy-classes-section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <div class="section-tag" style="padding-left:0;">Risk Classification</div>
+        <h2 class="section-title">CRA Product Risk Classes</h2>
+        <p class="section-sub">The CRA classifies products into four categories based on cybersecurity risk. Your class determines the conformity assessment route required.</p>
+      </div>
+
+      <div class="cy-classes-grid">
+
+        <div class="cy-class-card cls-default" data-aos="fade-up" data-aos-delay="100">
+          <div class="cy-class-header">
+            <div class="cy-class-label">Default Class</div>
+            <div class="cy-class-name">Standard Products</div>
+            <div class="cy-class-assess">Self-assessment allowed</div>
+          </div>
+          <div class="cy-class-body">
+            <p class="cy-class-desc">The majority of connected products. Manufacturers can self-declare conformity using internal processes aligned to CRA essential requirements.</p>
+            <div class="cy-class-examples">
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> Smart home devices</div>
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> Consumer IoT gadgets</div>
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> Basic connected sensors</div>
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> Peripheral connected equipment</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-class-card cls-1" data-aos="fade-up" data-aos-delay="150">
+          <div class="cy-class-header">
+            <div class="cy-class-label">Important — Class I</div>
+            <div class="cy-class-name">Elevated Risk</div>
+            <div class="cy-class-assess">Harmonised standard or third-party assessment</div>
+          </div>
+          <div class="cy-class-body">
+            <p class="cy-class-desc">Products where a breach could have significant impact. Conformity requires either applying a harmonised standard (e.g. EN 18031) or third-party evaluation.</p>
+            <div class="cy-class-examples">
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> Identity management software</div>
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> Password managers / VPNs</div>
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> Firewalls & network routers</div>
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> Microcontrollers (security role)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-class-card cls-2" data-aos="fade-up" data-aos-delay="200">
+          <div class="cy-class-header">
+            <div class="cy-class-label">Important — Class II</div>
+            <div class="cy-class-name">High Risk</div>
+            <div class="cy-class-assess">Mandatory third-party conformity assessment</div>
+          </div>
+          <div class="cy-class-body">
+            <p class="cy-class-desc">Products with high systemic risk. Only a notified body third-party assessment satisfies the conformity requirement — self-declaration is not permitted.</p>
+            <div class="cy-class-examples">
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> Operating systems (industrial)</div>
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> Hypervisors</div>
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> PKI infrastructure</div>
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> Industrial automation systems</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-class-card cls-critical" data-aos="fade-up" data-aos-delay="250">
+          <div class="cy-class-header">
+            <div class="cy-class-label">Critical</div>
+            <div class="cy-class-name">Critical Infrastructure</div>
+            <div class="cy-class-assess">EU cybersecurity certification scheme required</div>
+          </div>
+          <div class="cy-class-body">
+            <p class="cy-class-desc">Highest-risk products. Must comply with a European cybersecurity certification scheme under the EU Cybersecurity Act (ENISA).</p>
+            <div class="cy-class-examples">
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> Smart cards / HSMs</div>
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> Secure elements</div>
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> Critical infrastructure controllers</div>
+              <div class="cy-class-ex"><i class="fas fa-circle"></i> Tamper-resistant hardware</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STANDARDS DEEP DIVE ========== -->
+  <section class="cy-standards-section" id="cy-standards">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up" style="margin-bottom:60px;">
+        <div class="section-tag" style="padding-left:0; color:var(--cyber);">Technical Framework</div>
+        <h2 class="section-title">Standards We Work To</h2>
+        <p class="section-sub">The CRA mandates essential requirements. Harmonised standards define how to meet them technically.</p>
+      </div>
+
+      <div class="cy-std-blocks">
+
+        <!-- CRA Reg itself -->
+        <div class="cy-std-block" data-aos="fade-up">
+          <div class="cy-std-block-header">
+            <div class="cy-std-block-icon"><i class="fas fa-scale-balanced"></i></div>
+            <div class="cy-std-block-meta">
+              <div class="cy-std-block-number">European Union Regulation</div>
+              <div class="cy-std-block-name">Regulation (EU) 2024/2847</div>
+              <div class="cy-std-block-scope">Cyber Resilience Act — Horizontal cybersecurity requirements for products with digital elements across the EU single market</div>
+            </div>
+            <div class="cy-std-block-badge">CRA — Mandatory Law</div>
+          </div>
+          <div class="cy-std-block-body">
+            <p class="cy-std-block-desc">
+              The CRA establishes essential security requirements that all products with digital elements must meet before CE marking.
+              These requirements are not guidance — they are legal obligations enforceable by market surveillance authorities
+              in each member state. Non-compliance can result in market withdrawal, fines, and liability.
+            </p>
+
+            <!-- CRA Requirements Table -->
+            <div style="overflow-x:auto; border-radius: var(--radius-md); overflow: hidden; border: 1px solid rgba(0,180,219,0.15);">
+              <table class="cy-req-table">
+                <thead>
+                  <tr>
+                    <th>Requirement</th>
+                    <th>What it means</th>
+                    <th>Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>No known exploitable vulnerabilities at launch</td>
+                    <td>Products must ship without known unmitigated security vulnerabilities. Vulnerability scanning and dependency analysis are mandatory pre-launch activities.</td>
+                    <td><span class="cy-req-badge req-mandatory">MANDATORY</span></td>
+                  </tr>
+                  <tr>
+                    <td>Secure by default configuration</td>
+                    <td>Default settings must be secure. No default passwords. Unnecessary ports, services, and interfaces must be disabled by default.</td>
+                    <td><span class="cy-req-badge req-technical">TECHNICAL</span></td>
+                  </tr>
+                  <tr>
+                    <td>Data confidentiality & integrity</td>
+                    <td>Personal and sensitive data must be protected at rest and in transit. Integrity of transmitted commands and data must be verifiable.</td>
+                    <td><span class="cy-req-badge req-technical">TECHNICAL</span></td>
+                  </tr>
+                  <tr>
+                    <td>Minimal attack surface</td>
+                    <td>Only necessary interfaces, services, and communication channels should be exposed. Every exposed interface must be justified and protected.</td>
+                    <td><span class="cy-req-badge req-technical">TECHNICAL</span></td>
+                  </tr>
+                  <tr>
+                    <td>Security update mechanism</td>
+                    <td>Products must have mechanisms to receive and apply security updates securely and reliably for a minimum of 5 years from last placement on the market.</td>
+                    <td><span class="cy-req-badge req-mandatory">MANDATORY</span></td>
+                  </tr>
+                  <tr>
+                    <td>Software Bill of Materials (SBOM)</td>
+                    <td>Manufacturers must maintain a machine-readable SBOM covering all software components including third-party and open-source dependencies.</td>
+                    <td><span class="cy-req-badge req-process">PROCESS</span></td>
+                  </tr>
+                  <tr>
+                    <td>Vulnerability handling & disclosure</td>
+                    <td>Coordinated vulnerability disclosure policy must exist and be publicly accessible. Vulnerabilities must be addressed without undue delay.</td>
+                    <td><span class="cy-req-badge req-process">PROCESS</span></td>
+                  </tr>
+                  <tr>
+                    <td>ENISA incident reporting (24hr)</td>
+                    <td>Actively exploited vulnerabilities must be reported to ENISA within 24 hours (early warning), full report within 72 hours, final report within 14 days.</td>
+                    <td><span class="cy-req-badge req-mandatory">MANDATORY</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- EN 18031 Series -->
+        <div class="cy-std-block" data-aos="fade-up" data-aos-delay="100">
+          <div class="cy-std-block-header">
+            <div class="cy-std-block-icon"><i class="fas fa-file-shield"></i></div>
+            <div class="cy-std-block-meta">
+              <div class="cy-std-block-number">Harmonised Standard Series</div>
+              <div class="cy-std-block-name">EN 18031 Series</div>
+              <div class="cy-std-block-scope">Common security requirements for radio equipment and internet-connected devices — the primary harmonised standard path for CRA conformity</div>
+            </div>
+            <div class="cy-std-block-badge">CRA Harmonised Standard</div>
+          </div>
+          <div class="cy-std-block-body">
+            <p class="cy-std-block-desc">
+              The EN 18031 series is the key harmonised standard family developed to give manufacturers a
+              defined technical path to CRA conformity. Applying EN 18031 creates a presumption of conformity
+              with the corresponding CRA essential requirements — meaning manufacturers who fully implement
+              the standard can self-declare compliance (for default and Class I products) without requiring
+              individual regulatory interpretation of each requirement.
+            </p>
+            <div class="cy-std-block-grid">
+              <div class="cy-std-item">
+                <div class="cy-std-item-icon"><i class="fas fa-globe"></i></div>
+                <h4>EN 18031-1 — General IoT Requirements</h4>
+                <p>Security baseline for all internet-connected radio equipment and IoT devices. Covers authentication, access control, data protection, and update mechanisms.</p>
+              </div>
+              <div class="cy-std-item">
+                <div class="cy-std-item-icon"><i class="fas fa-wifi"></i></div>
+                <h4>EN 18031-2 — Internet-Connected Devices</h4>
+                <p>Extended requirements for devices with direct internet connectivity, covering network-level attack surface management and remote access security.</p>
+              </div>
+              <div class="cy-std-item">
+                <div class="cy-std-item-icon"><i class="fas fa-person-rays"></i></div>
+                <h4>EN 18031-3 — Wearables & Personal Devices</h4>
+                <p>Security requirements specific to wearable and personal-use connected devices, with additional considerations for personal data handling.</p>
+              </div>
+              <div class="cy-std-item">
+                <div class="cy-std-item-icon"><i class="fas fa-key"></i></div>
+                <h4>Authentication & Access Control</h4>
+                <p>Requirements for user authentication, administrative access protection, and credential management — no default credentials permissible.</p>
+              </div>
+              <div class="cy-std-item">
+                <div class="cy-std-item-icon"><i class="fas fa-lock"></i></div>
+                <h4>Data Protection in Transit & at Rest</h4>
+                <p>Cryptographic requirements for protecting sensitive data — encryption standards, key management, and integrity verification mechanisms.</p>
+              </div>
+              <div class="cy-std-item">
+                <div class="cy-std-item-icon"><i class="fas fa-rotate"></i></div>
+                <h4>Secure Update Mechanisms</h4>
+                <p>Technical requirements for OTA and physical update processes — signed firmware, rollback protection, atomic update procedures, and update integrity verification.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROCESS ========== -->
+  <section class="cy-process-section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <div class="section-tag" style="padding-left:0;">How We Work</div>
+        <h2 class="section-title">Our CRA Compliance Process</h2>
+        <p class="section-sub">A clear, structured path from your current state to a CRA-compliant product — with full documentation and evidence at every step.</p>
+      </div>
+
+      <div class="cy-process-grid">
+
+        <div class="cy-process-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="cy-process-step-num">01</div>
+          <div class="cy-process-icon"><i class="fas fa-magnifying-glass"></i></div>
+          <h3>CRA Gap Assessment</h3>
+          <p>We review your product's current security posture against CRA essential requirements and EN 18031 controls — identifying every gap and scoring priority by risk and enforcement dependency.</p>
+          <div class="cy-process-outputs">
+            <div class="cy-process-output"><i class="fas fa-circle"></i> Gap assessment report</div>
+            <div class="cy-process-output"><i class="fas fa-circle"></i> Risk-prioritised remediation plan</div>
+            <div class="cy-process-output"><i class="fas fa-circle"></i> CRA classification determination</div>
+          </div>
+        </div>
+
+        <div class="cy-process-card" data-aos="fade-up" data-aos-delay="150">
+          <div class="cy-process-step-num">02</div>
+          <div class="cy-process-icon"><i class="fas fa-crosshairs"></i></div>
+          <h3>Threat Modelling (STRIDE)</h3>
+          <p>Systematic threat analysis of your product's architecture using the STRIDE methodology — identifying all realistic attack vectors, threat actors, and the impact of each successful attack.</p>
+          <div class="cy-process-outputs">
+            <div class="cy-process-output"><i class="fas fa-circle"></i> Threat model document</div>
+            <div class="cy-process-output"><i class="fas fa-circle"></i> Attack surface map</div>
+            <div class="cy-process-output"><i class="fas fa-circle"></i> Security control mapping</div>
+          </div>
+        </div>
+
+        <div class="cy-process-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="cy-process-step-num">03</div>
+          <div class="cy-process-icon"><i class="fas fa-drafting-compass"></i></div>
+          <h3>Secure Architecture Design</h3>
+          <p>Security controls are designed into the product architecture — secure boot chain, hardware security (TPM/SE), encrypted storage, minimal attack surface, and segmented communication channels.</p>
+          <div class="cy-process-outputs">
+            <div class="cy-process-output"><i class="fas fa-circle"></i> Security architecture document</div>
+            <div class="cy-process-output"><i class="fas fa-circle"></i> Hardware security specification</div>
+            <div class="cy-process-output"><i class="fas fa-circle"></i> Cryptographic design doc</div>
+          </div>
+        </div>
+
+        <div class="cy-process-card" data-aos="fade-up" data-aos-delay="250">
+          <div class="cy-process-step-num">04</div>
+          <div class="cy-process-icon"><i class="fas fa-code"></i></div>
+          <h3>Secure Firmware Development</h3>
+          <p>Implementation of all security controls — secure boot, code signing, OTA update verification, key management, runtime protections (stack canaries, ASLR where applicable), and hardened network stack.</p>
+          <div class="cy-process-outputs">
+            <div class="cy-process-output"><i class="fas fa-circle"></i> Reviewed secure firmware</div>
+            <div class="cy-process-output"><i class="fas fa-circle"></i> Static analysis (SAST) results</div>
+            <div class="cy-process-output"><i class="fas fa-circle"></i> Component SBOM</div>
+          </div>
+        </div>
+
+        <div class="cy-process-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="cy-process-step-num">05</div>
+          <div class="cy-process-icon"><i class="fas fa-bug-slash"></i></div>
+          <h3>Security Testing & Pen Test</h3>
+          <p>End-to-end security validation — vulnerability scanning, fuzzing of communication interfaces, authentication bypass testing, and targeted penetration testing against the threat model attack vectors.</p>
+          <div class="cy-process-outputs">
+            <div class="cy-process-output"><i class="fas fa-circle"></i> Vulnerability scan reports</div>
+            <div class="cy-process-output"><i class="fas fa-circle"></i> Penetration test report</div>
+            <div class="cy-process-output"><i class="fas fa-circle"></i> Residual risk register</div>
+          </div>
+        </div>
+
+        <div class="cy-process-card" data-aos="fade-up" data-aos-delay="350">
+          <div class="cy-process-step-num">06</div>
+          <div class="cy-process-icon"><i class="fas fa-folder-open"></i></div>
+          <h3>CRA Technical File & SBOM</h3>
+          <p>Complete CRA technical documentation package — security assessment, EN 18031 conformity evidence, SBOM, vulnerability disclosure policy, security update commitment, and Declaration of Conformity.</p>
+          <div class="cy-process-outputs">
+            <div class="cy-process-output"><i class="fas fa-circle"></i> CRA technical file</div>
+            <div class="cy-process-output"><i class="fas fa-circle"></i> Machine-readable SBOM</div>
+            <div class="cy-process-output"><i class="fas fa-circle"></i> EU Declaration of Conformity</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INDUSTRIES ========== -->
+  <section class="cy-industries-section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <div class="section-tag" style="padding-left:0;">Sectors We Serve</div>
+        <h2 class="section-title">Who Needs CRA Compliance</h2>
+        <p class="section-sub">Any company placing a connected product on the EU market. These sectors are most directly impacted by the CRA's scope.</p>
+      </div>
+
+      <div class="cy-industries-grid">
+
+        <div class="cy-industry-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="cy-industry-icon"><i class="fas fa-microchip"></i></div>
+          <h3>Embedded & IoT Product Companies</h3>
+          <p>Hardware startups and product companies building connected embedded devices — from prototype to mass market. CRA compliance is required for EU market access.</p>
+          <div class="cy-industry-reqs">
+            <span class="cy-req-pill">Secure Boot</span>
+            <span class="cy-req-pill">OTA Updates</span>
+            <span class="cy-req-pill">SBOM</span>
+          </div>
+        </div>
+
+        <div class="cy-industry-card" data-aos="fade-up" data-aos-delay="130">
+          <div class="cy-industry-icon"><i class="fas fa-industry"></i></div>
+          <h3>Industrial & Manufacturing</h3>
+          <p>Industrial controllers, PLCs, SCADA interfaces, and condition monitoring systems connected to OT/IT networks. Often Class I or Class II products under CRA.</p>
+          <div class="cy-industry-reqs">
+            <span class="cy-req-pill">Network Segmentation</span>
+            <span class="cy-req-pill">Access Control</span>
+            <span class="cy-req-pill">Third-Party Assessment</span>
+          </div>
+        </div>
+
+        <div class="cy-industry-card" data-aos="fade-up" data-aos-delay="160">
+          <div class="cy-industry-icon"><i class="fas fa-house-signal"></i></div>
+          <h3>Smart Home & Consumer IoT</h3>
+          <p>Connected home devices, wearables, and consumer electronics. Typically default class — self-assessment permitted but requires proper security design and documentation.</p>
+          <div class="cy-industry-reqs">
+            <span class="cy-req-pill">Default Security</span>
+            <span class="cy-req-pill">EN 18031-1</span>
+            <span class="cy-req-pill">Vuln. Disclosure</span>
+          </div>
+        </div>
+
+        <div class="cy-industry-card" data-aos="fade-up" data-aos-delay="190">
+          <div class="cy-industry-icon"><i class="fas fa-heart-pulse"></i></div>
+          <h3>Medical & Healthcare</h3>
+          <p>Connected diagnostic devices, remote monitoring equipment, and clinical IoT. CRA overlaps with MDR obligations — dual compliance pathway planning is essential.</p>
+          <div class="cy-industry-reqs">
+            <span class="cy-req-pill">Data Encryption</span>
+            <span class="cy-req-pill">MDR Alignment</span>
+            <span class="cy-req-pill">ENISA Reporting</span>
+          </div>
+        </div>
+
+        <div class="cy-industry-card" data-aos="fade-up" data-aos-delay="220">
+          <div class="cy-industry-icon"><i class="fas fa-car-side"></i></div>
+          <h3>Automotive & Transport</h3>
+          <p>Connected vehicle components, telematics units, and fleet management devices. CRA applies alongside UN R155 for automotive cybersecurity — coordinated compliance required.</p>
+          <div class="cy-industry-reqs">
+            <span class="cy-req-pill">UN R155</span>
+            <span class="cy-req-pill">Secure Comms</span>
+            <span class="cy-req-pill">Lifecycle Mgmt</span>
+          </div>
+        </div>
+
+        <div class="cy-industry-card" data-aos="fade-up" data-aos-delay="250">
+          <div class="cy-industry-icon"><i class="fas fa-solar-panel"></i></div>
+          <h3>Energy & Smart Grid</h3>
+          <p>Smart meters, grid monitoring systems, EV charging infrastructure, and renewable energy controllers. Critical infrastructure context often places these in Class II or Critical.</p>
+          <div class="cy-industry-reqs">
+            <span class="cy-req-pill">Critical Class</span>
+            <span class="cy-req-pill">3rd-Party Audit</span>
+            <span class="cy-req-pill">Incident Reporting</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PORTFOLIO PROOF ========== -->
+  <section class="cy-proof-section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up" style="margin-bottom:48px;">
+        <div class="section-tag" style="padding-left:0; color: rgba(255,255,255,0.5);">Real Work</div>
+        <h2 class="section-title" style="color:var(--white);">Security Engineering in Practice</h2>
+        <p class="section-sub" style="color:rgba(255,255,255,0.5);">Security-aligned development applied to shipped embedded products.</p>
+      </div>
+
+      <div class="cy-proof-inner" data-aos="fade-up">
+        <div>
+          <div class="cy-proof-tag">Embedded Security — Shipped Product</div>
+          <div class="cy-proof-title">Air OTG & OTG CO — Connected Air Quality Monitors</div>
+          <p class="cy-proof-desc">
+            Customer-facing IoT devices with mobile app connectivity, cloud data sync, and firmware update capability.
+            Designed with security-first architecture — secure communication, authenticated updates, minimal attack surface,
+            and no hardcoded credentials. Live on the App Store. The type of connected product the CRA directly governs.
+          </p>
+          <div class="cy-proof-stack">
+            <span class="cy-proof-chip">ESP32</span>
+            <span class="cy-proof-chip">BLE / Wi-Fi</span>
+            <span class="cy-proof-chip">iOS & Android</span>
+            <span class="cy-proof-chip">Cloud Backend</span>
+            <span class="cy-proof-chip">OTA Updates</span>
+            <span class="cy-proof-chip cyber-chip">Secure Comms</span>
+            <span class="cy-proof-chip cyber-chip">Auth'd Updates</span>
+            <span class="cy-proof-chip cyber-chip">No Default Creds</span>
+          </div>
+          <div class="cy-proof-outcomes">
+            <div class="cy-proof-outcome-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Encrypted BLE communication with authenticated pairing — no unauthenticated device access</span>
+            </div>
+            <div class="cy-proof-outcome-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Signed OTA firmware updates with integrity verification before application — rollback protection included</span>
+            </div>
+            <div class="cy-proof-outcome-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Minimal network interface exposure — only required services enabled, all others disabled by default</span>
+            </div>
+            <div class="cy-proof-outcome-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Successfully published on Apple App Store and Google Play — live in customer hands</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Threat dashboard mockup -->
+        <div data-aos="fade-left">
+          <div class="cy-threat-dashboard">
+            <div class="cy-threat-header">
+              <div class="cy-threat-title">THREAT MODEL — AIR OTG</div>
+              <div class="cy-threat-status"><span class="dot"></span> MONITORED</div>
+            </div>
+            <div class="cy-threat-body">
+              <div class="cy-threat-item mitigated">
+                <div class="cy-threat-icon"><i class="fas fa-wifi"></i></div>
+                <div class="cy-threat-info">
+                  <div class="cy-threat-name">BLE Eavesdropping</div>
+                  <div class="cy-threat-sub">T-BLE-01 · Spoofing</div>
+                </div>
+                <div class="cy-threat-badge">MITIGATED</div>
+              </div>
+              <div class="cy-threat-item mitigated">
+                <div class="cy-threat-icon"><i class="fas fa-cloud-arrow-up"></i></div>
+                <div class="cy-threat-info">
+                  <div class="cy-threat-name">Firmware Injection via OTA</div>
+                  <div class="cy-threat-sub">T-OTA-02 · Tampering</div>
+                </div>
+                <div class="cy-threat-badge">MITIGATED</div>
+              </div>
+              <div class="cy-threat-item mitigated">
+                <div class="cy-threat-icon"><i class="fas fa-key"></i></div>
+                <div class="cy-threat-info">
+                  <div class="cy-threat-name">Credential Extraction</div>
+                  <div class="cy-threat-sub">T-AUTH-03 · Info Disclosure</div>
+                </div>
+                <div class="cy-threat-badge">MITIGATED</div>
+              </div>
+              <div class="cy-threat-item mitigated">
+                <div class="cy-threat-icon"><i class="fas fa-network-wired"></i></div>
+                <div class="cy-threat-info">
+                  <div class="cy-threat-name">Man-in-the-Middle (Cloud)</div>
+                  <div class="cy-threat-sub">T-NET-04 · Tampering</div>
+                </div>
+                <div class="cy-threat-badge">MITIGATED</div>
+              </div>
+              <div class="cy-threat-item partial">
+                <div class="cy-threat-icon"><i class="fas fa-microchip"></i></div>
+                <div class="cy-threat-info">
+                  <div class="cy-threat-name">Physical Debug Port Access</div>
+                  <div class="cy-threat-sub">T-PHY-05 · Elevation of Privilege</div>
+                </div>
+                <div class="cy-threat-badge">ACCEPTED</div>
+              </div>
+              <div class="cy-threat-item mitigated">
+                <div class="cy-threat-icon"><i class="fas fa-bomb"></i></div>
+                <div class="cy-threat-info">
+                  <div class="cy-threat-name">DoS via BLE Flooding</div>
+                  <div class="cy-threat-sub">T-DOS-06 · Denial of Service</div>
+                </div>
+                <div class="cy-threat-badge">MITIGATED</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="cy-faq-section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <div class="section-tag" style="padding-left:0;">Common Questions</div>
+        <h2 class="section-title">CRA — Frequently Asked Questions</h2>
+        <p class="section-sub">Technical and commercial questions about CRA compliance for embedded product companies.</p>
+      </div>
+
+      <div class="cy-faq-grid" data-aos="fade-up">
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>Does the CRA apply to my product if it connects to an app via Bluetooth only?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              Yes. The CRA's definition of "network connectivity" is broad — it covers any means of data exchange including Bluetooth, Wi-Fi, Zigbee, LoRa, NFC, and wired interfaces. <strong>If your product can communicate with another device or system in any form, it is within scope.</strong> The only products explicitly excluded are those with purely passive data storage (no processing or connectivity), products covered by specific sector regulations that already include equivalent cybersecurity requirements (e.g. some medical devices under MDR), and open-source software published outside of commercial activity.
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>Our product is already on the market. Do we have to comply before October 2027?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              Products already on the market before full enforcement (October 2027) have transition protection — they are not immediately required to be withdrawn. However, <strong>any product placed (or re-placed) on the market after October 2027 must be CRA compliant</strong>, even if it is an updated version of an existing product. This means that if you release a new firmware version, new hardware revision, or market the product to a new customer after the enforcement date, compliance is required. Starting your compliance programme now (especially the gap assessment and threat model) avoids the October 2027 crunch and positions you ahead of competitors still scrambling.
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>What is an SBOM and do I really need one?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              A Software Bill of Materials is a machine-readable inventory of every software component in your product — your own code, open-source libraries, third-party SDKs, and dependencies. <strong>Yes, it is a CRA legal requirement.</strong> The practical reason it matters: the SBOM is how you track known vulnerability exposure. When a new CVE is published for a library you use (e.g. a CVSS 9.8 vulnerability in an RTOS component), your SBOM tells you instantly whether you're affected — which is exactly the information ENISA needs from you within 24 hours. We generate SBOM files in SPDX or CycloneDX format (both accepted) as part of our compliance deliverables.
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>What does "security updates for 5 years" mean in practice for a hardware product?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              It means that from the date your product is last placed on the market, you must be capable of delivering and the product must be capable of receiving security-relevant firmware updates for a minimum of 5 years. In practice, this has three implications:
+              <br/><br/>
+              <strong>1. Hardware:</strong> The device must have an OTA update mechanism capable of receiving and applying security patches — retrofit of update capability post-launch is very difficult.
+              <br/><br/>
+              <strong>2. Organisation:</strong> You must maintain the engineering capability (internal or contracted) to identify and release security patches over this period.
+              <br/><br/>
+              <strong>3. Disclosure:</strong> If you are ending support earlier than 5 years, you must clearly disclose this in product documentation at time of sale. We design OTA update mechanisms into products as a CRA prerequisite, not as an afterthought.
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>Can Mikronexis handle the full compliance journey, or only part of it?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              We handle the complete engineering side of the CRA compliance journey — <strong>gap assessment, threat modelling, secure architecture design, compliant firmware development, security testing, SBOM generation, and full technical file preparation including the Declaration of Conformity</strong>. For Class I products using harmonised standards (EN 18031), this entire path can be completed without a notified body. For Class II products where a third-party conformity assessment is mandatory, we prepare the complete technical submission package and coordinate with the notified body on your behalf. We do not provide legal advice but will flag any product liability or regulatory interpretation questions to be confirmed with your legal counsel.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section class="cy-cta-section">
+    <div class="container">
+      <div class="cy-cta-inner" data-aos="fade-up">
+        <div class="section-tag" style="color:var(--cyber); text-align:center; padding-left:0; display:block; margin-bottom:16px;">Start Now</div>
+        <h2 class="section-title">CRA Compliance Starts With a Gap Assessment</h2>
+        <p class="cy-cta-desc">
+          Most connected embedded products have significant CRA gaps — especially around SBOM, OTA update security,
+          and vulnerability disclosure processes. A gap assessment tells you exactly where you stand and what it
+          takes to get compliant before the October 2027 enforcement date.
+        </p>
+
+        <div class="cy-deadline-notice">
+          <i class="fas fa-calendar-xmark"></i>
+          <div>
+            <strong>September 2026: Reporting obligations become active — 15 months away</strong>
+            <span>Your vulnerability disclosure process and ENISA reporting capability need to be in place before September 2026. Starting your compliance programme now ensures you hit this milestone without a crunch.</span>
+          </div>
+        </div>
+
+        <div class="cy-cta-features">
+          <div class="cy-cta-feat"><i class="fas fa-check"></i> CRA Gap Assessment</div>
+          <div class="cy-cta-feat"><i class="fas fa-check"></i> EN 18031 Series Implementation</div>
+          <div class="cy-cta-feat"><i class="fas fa-check"></i> Threat Modelling & Pen Testing</div>
+          <div class="cy-cta-feat"><i class="fas fa-check"></i> SBOM Generation</div>
+          <div class="cy-cta-feat"><i class="fas fa-check"></i> Full Technical File</div>
+          <div class="cy-cta-feat"><i class="fas fa-check"></i> Declaration of Conformity</div>
+        </div>
+
+        <div class="cy-cta-actions">
+          <a href="index.html#contact" class="btn btn-cyber">
+            Request a Gap Assessment <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="index.html#services" class="btn btn-outline-cyber">
+            View All Services <i class="fas fa-th-large"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER BAR ========== -->
+  <div class="cy-footer-bar">
+    <div class="cy-footer-left">
+      <img src="assests/logo_dark.png" alt="Mikronexis" class="cy-footer-logo" />
+      <div class="cy-footer-sep"></div>
+      <span class="cy-footer-text">Cybersecurity for Embedded Devices — Mikronexis</span>
+    </div>
+    <a href="index.html" class="cy-footer-link">
+      <i class="fas fa-arrow-left"></i> Back to Main Site
+    </a>
+  </div>
+
+  <!-- ========== BACK TO TOP ========== -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script>
+    'use strict';
+
+    // Preloader
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const pre = document.getElementById('cy-preloader');
+        if (pre) { pre.classList.add('hidden'); setTimeout(() => pre.remove(), 600); }
+      }, 1200);
+    });
+
+    // Navbar
+    const navbar  = document.getElementById('navbar');
+    const btt     = document.getElementById('backToTop');
+    const toggle  = document.getElementById('navToggle');
+    const links   = document.getElementById('navLinks');
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+      btt.classList.toggle('visible', window.scrollY > 400);
+    });
+
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('open');
+      const spans = toggle.querySelectorAll('span');
+      if (links.classList.contains('open')) {
+        spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+      } else {
+        spans[0].style.transform = '';
+        spans[1].style.opacity = '';
+        spans[2].style.transform = '';
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!navbar.contains(e.target) && links.classList.contains('open')) {
+        links.classList.remove('open');
+        const spans = toggle.querySelectorAll('span');
+        spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+      }
+    });
+
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); }
+      });
+    });
+
+    // AOS
+    function initAOS() {
+      const els = document.querySelectorAll('[data-aos]');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            setTimeout(() => el.classList.add('aos-animate'), parseInt(el.getAttribute('data-aos-delay')) || 0);
+            obs.unobserve(el);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+      els.forEach(el => obs.observe(el));
+    }
+
+    // FAQ
+    function initFAQ() {
+      document.querySelectorAll('.cy-faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.cy-faq-item');
+          const isOpen = item.classList.contains('open');
+          document.querySelectorAll('.cy-faq-item.open').forEach(i => i.classList.remove('open'));
+          if (!isOpen) item.classList.add('open');
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => { initAOS(); initFAQ(); });
+  </script>
+</body>
+</html>
