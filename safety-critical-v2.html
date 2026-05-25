@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- safety-critical-v2.html -->
 <title>Safety Critical Engineering | MIKRONEXIS</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Geist:wght@400;600&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -218,6 +219,47 @@
     </div>
   </section>
 
+  <!-- Consequence of Failure Table -->
+  <section class="w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto py-xl border-t border-outline-variant/30">
+    <div class="mb-lg">
+      <h2 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-xs">Domain Analysis</h2>
+      <h3 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary">Consequence of Failure by Domain</h3>
+    </div>
+    <div class="overflow-x-auto border border-outline-variant/30 rounded-lg">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-surface-container border-b border-outline-variant/30">
+            <th class="p-md font-label-caps text-label-caps text-on-surface-variant">Domain</th>
+            <th class="p-md font-label-caps text-label-caps text-on-surface-variant">Primary Hazard</th>
+            <th class="p-md font-label-caps text-label-caps text-on-surface-variant">Certification Basis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-outline-variant/30 hover:bg-surface-container/50 transition-colors">
+            <td class="p-md font-code text-code text-primary">Gas Detection (Toxic)</td>
+            <td class="p-md font-body-sm text-body-sm text-on-surface-variant">Undetected atmospheric hazard leading to personnel exposure.</td>
+            <td class="p-md font-code text-code text-primary-container">EN 50271 / SIL 1-2</td>
+          </tr>
+          <tr class="border-b border-outline-variant/30 hover:bg-surface-container/50 transition-colors">
+            <td class="p-md font-code text-code text-primary">Gas Detection (Combustible)</td>
+            <td class="p-md font-body-sm text-body-sm text-on-surface-variant">Ignition of flammable atmosphere due to delayed response or internal fault.</td>
+            <td class="p-md font-code text-code text-primary-container">EN 50271 / IEC 60079-29-1</td>
+          </tr>
+          <tr class="border-b border-outline-variant/30 hover:bg-surface-container/50 transition-colors">
+            <td class="p-md font-code text-code text-primary">Explosive Atmospheres (Ex)</td>
+            <td class="p-md font-body-sm text-body-sm text-on-surface-variant">Equipment becoming an ignition source via thermal or electrical energy.</td>
+            <td class="p-md font-code text-code text-primary-container">IEC 60079 Series (ATEX/IECEx)</td>
+          </tr>
+          <tr class="hover:bg-surface-container/50 transition-colors">
+            <td class="p-md font-code text-code text-primary">Industrial Automation</td>
+            <td class="p-md font-body-sm text-body-sm text-on-surface-variant">Uncontrolled mechanical movement or process failure.</td>
+            <td class="p-md font-code text-code text-primary-container">IEC 61508 / Machinery Directive</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <!-- The Standards We Work To (Bento Grid) -->
   <section class="w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto py-xl border-t border-outline-variant/30" id="standards">
     <div class="mb-lg">
@@ -245,7 +287,7 @@
             <li class="flex items-start gap-sm">
               <span class="material-symbols-outlined text-primary-container text-sm mt-xs">check</span>
               <div>
-                <span class="font-code text-code text-on-surface block">Software Requirements Specification</span>
+                <span class="font-code text-code text-on-surface block">Software Requirements Specification (SRS)</span>
                 <span class="font-body-sm text-body-sm text-on-surface-variant block">Formal definition of all software functions and constraints.</span>
               </div>
             </li>
@@ -253,14 +295,28 @@
               <span class="material-symbols-outlined text-primary-container text-sm mt-xs">check</span>
               <div>
                 <span class="font-code text-code text-on-surface block">Software Architecture &amp; Design</span>
-                <span class="font-body-sm text-body-sm text-on-surface-variant block">Structured design with clear module separation.</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block">Structured design with clear module separation and data flow.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="material-symbols-outlined text-primary-container text-sm mt-xs">check</span>
+              <div>
+                <span class="font-code text-code text-on-surface block">Coding Guidelines</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block">Adherence to MISRA C or equivalent safety-focused standards.</span>
               </div>
             </li>
             <li class="flex items-start gap-sm">
               <span class="material-symbols-outlined text-primary-container text-sm mt-xs">check</span>
               <div>
                 <span class="font-code text-code text-on-surface block">Verification &amp; Validation</span>
-                <span class="font-body-sm text-body-sm text-on-surface-variant block">Systematic testing including unit and integration tests.</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block">Systematic testing including unit, integration, and system tests.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="material-symbols-outlined text-primary-container text-sm mt-xs">check</span>
+              <div>
+                <span class="font-code text-code text-on-surface block">Traceability Matrix</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block">End-to-end tracing from requirements to implementation and test.</span>
               </div>
             </li>
           </ul>
@@ -290,8 +346,22 @@
             <li class="flex items-start gap-sm">
               <span class="material-symbols-outlined text-secondary text-sm mt-xs">check</span>
               <div>
-                <span class="font-code text-code text-on-surface block">Ex d Flameproof &amp; Ex i Intrinsic Safety</span>
-                <span class="font-body-sm text-body-sm text-on-surface-variant block">Design strategies for flameproof and low energy circuits.</span>
+                <span class="font-code text-code text-on-surface block">Ex d (Flameproof Enclosures)</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block">Containment of internal explosions without igniting external atmosphere.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="material-symbols-outlined text-secondary text-sm mt-xs">check</span>
+              <div>
+                <span class="font-code text-code text-on-surface block">Ex i (Intrinsic Safety)</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block">Limiting electrical and thermal energy to prevent ignition.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="material-symbols-outlined text-secondary text-sm mt-xs">check</span>
+              <div>
+                <span class="font-code text-code text-on-surface block">Ex e (Increased Safety)</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block">Enhanced measures against excessive temperatures and arcs.</span>
               </div>
             </li>
             <li class="flex items-start gap-sm">
@@ -304,6 +374,175 @@
           </ul>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Gas Monitor Dashboard UI Mockup -->
+  <section class="w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto py-xl border-t border-outline-variant/30">
+    <div class="bg-surface-container border border-outline-variant/50 rounded-lg overflow-hidden">
+      <div class="bg-surface-container-high border-b border-outline-variant/50 p-sm flex items-center justify-between">
+        <span class="font-code text-code text-on-surface-variant">MKN-GM1 System Diagnostics</span>
+        <div class="flex space-x-2">
+          <div class="w-3 h-3 rounded-full bg-error"></div>
+          <div class="w-3 h-3 rounded-full bg-secondary"></div>
+          <div class="w-3 h-3 rounded-full bg-primary-container"></div>
+        </div>
+      </div>
+      <div class="p-lg grid grid-cols-1 md:grid-cols-3 gap-lg">
+        <div class="border border-outline-variant/30 p-md rounded bg-surface">
+          <span class="font-label-caps text-label-caps text-on-surface-variant block mb-sm">Sensor Status</span>
+          <div class="flex items-center gap-sm mb-xs">
+            <span class="material-symbols-outlined text-primary-container text-sm">check_circle</span>
+            <span class="font-code text-code text-primary">H2S Channel 1 OK</span>
+          </div>
+          <div class="flex items-center gap-sm mb-xs">
+            <span class="material-symbols-outlined text-primary-container text-sm">check_circle</span>
+            <span class="font-code text-code text-primary">LEL Channel 2 OK</span>
+          </div>
+          <div class="flex items-center gap-sm">
+            <span class="material-symbols-outlined text-primary-container text-sm">check_circle</span>
+            <span class="font-code text-code text-primary">O2 Channel 3 OK</span>
+          </div>
+        </div>
+        <div class="border border-outline-variant/30 p-md rounded bg-surface">
+          <span class="font-label-caps text-label-caps text-on-surface-variant block mb-sm">Self-Test Diagnostic</span>
+          <div class="flex justify-between items-center border-b border-outline-variant/20 py-xs">
+            <span class="font-body-sm text-body-sm text-on-surface">Memory Integrity</span>
+            <span class="font-code text-code text-primary-container">PASS</span>
+          </div>
+          <div class="flex justify-between items-center border-b border-outline-variant/20 py-xs">
+            <span class="font-body-sm text-body-sm text-on-surface">Watchdog Timer</span>
+            <span class="font-code text-code text-primary-container">PASS</span>
+          </div>
+          <div class="flex justify-between items-center py-xs">
+            <span class="font-body-sm text-body-sm text-on-surface">Power Supply rails</span>
+            <span class="font-code text-code text-primary-container">PASS</span>
+          </div>
+        </div>
+        <div class="border border-outline-variant/30 p-md rounded bg-surface">
+          <span class="font-label-caps text-label-caps text-on-surface-variant block mb-sm">Active Alerts</span>
+          <span class="font-body-sm text-body-sm text-on-surface-variant italic">No active faults detected. System operating normally.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Safety Engineering Process -->
+  <section class="w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto py-xl border-t border-outline-variant/30" id="process">
+    <div class="mb-lg">
+      <h2 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-xs">Methodology</h2>
+      <h3 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary">Our Safety Engineering Process</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant mt-sm max-w-2xl">
+        Developing a certifiable product requires a rigorous, documented process from day one.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+      <div class="border border-outline-variant/30 p-lg rounded bg-surface-container relative">
+        <span class="absolute top-md right-md font-headline-xl text-headline-xl text-outline-variant/20">01</span>
+        <h4 class="font-code text-code text-primary font-bold mb-sm">Phase 1: Concept &amp; Hazard Analysis</h4>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Identifying the operational context, regulatory requirements, and potential hazards.</p>
+        <span class="font-label-caps text-label-caps text-secondary block mb-xs">Deliverables:</span>
+        <ul class="list-disc pl-sm font-body-sm text-body-sm text-on-surface">
+          <li>Product Concept Document</li>
+          <li>Initial Hazard Register</li>
+          <li>Regulatory Strategy Plan</li>
+        </ul>
+      </div>
+      <div class="border border-outline-variant/30 p-lg rounded bg-surface-container relative">
+        <span class="absolute top-md right-md font-headline-xl text-headline-xl text-outline-variant/20">02</span>
+        <h4 class="font-code text-code text-primary font-bold mb-sm">Phase 2: Requirements Engineering</h4>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Translating hazards and operational needs into formal, verifiable requirements.</p>
+        <span class="font-label-caps text-label-caps text-secondary block mb-xs">Deliverables:</span>
+        <ul class="list-disc pl-sm font-body-sm text-body-sm text-on-surface">
+          <li>System Requirements Specification</li>
+          <li>Software Requirements Specification (SRS)</li>
+          <li>Hardware Requirements Specification</li>
+        </ul>
+      </div>
+      <div class="border border-outline-variant/30 p-lg rounded bg-surface-container relative">
+        <span class="absolute top-md right-md font-headline-xl text-headline-xl text-outline-variant/20">03</span>
+        <h4 class="font-code text-code text-primary font-bold mb-sm">Phase 3: Architecture &amp; Design</h4>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Structuring the system to ensure fail-safe operation and meet standard constraints.</p>
+        <span class="font-label-caps text-label-caps text-secondary block mb-xs">Deliverables:</span>
+        <ul class="list-disc pl-sm font-body-sm text-body-sm text-on-surface">
+          <li>System Architecture Document</li>
+          <li>Hardware Design / Schematics</li>
+          <li>Software Design Description (SDD)</li>
+        </ul>
+      </div>
+      <div class="border border-outline-variant/30 p-lg rounded bg-surface-container relative">
+        <span class="absolute top-md right-md font-headline-xl text-headline-xl text-outline-variant/20">04</span>
+        <h4 class="font-code text-code text-primary font-bold mb-sm">Phase 4: Implementation</h4>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Executing the design according to strict coding standards and hardware layout rules.</p>
+        <span class="font-label-caps text-label-caps text-secondary block mb-xs">Deliverables:</span>
+        <ul class="list-disc pl-sm font-body-sm text-body-sm text-on-surface">
+          <li>Source Code (MISRA compliant)</li>
+          <li>PCBA Layout files</li>
+          <li>Code Review Records</li>
+        </ul>
+      </div>
+      <div class="border border-outline-variant/30 p-lg rounded bg-surface-container relative">
+        <span class="absolute top-md right-md font-headline-xl text-headline-xl text-outline-variant/20">05</span>
+        <h4 class="font-code text-code text-primary font-bold mb-sm">Phase 5: Verification &amp; Validation</h4>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Rigorous testing to prove every requirement has been met and the system is safe.</p>
+        <span class="font-label-caps text-label-caps text-secondary block mb-xs">Deliverables:</span>
+        <ul class="list-disc pl-sm font-body-sm text-body-sm text-on-surface">
+          <li>Test Plans &amp; Procedures</li>
+          <li>Unit &amp; Integration Test Reports</li>
+          <li>Requirements Traceability Matrix</li>
+        </ul>
+      </div>
+      <div class="border border-outline-variant/30 p-lg rounded bg-surface-container relative">
+        <span class="absolute top-md right-md font-headline-xl text-headline-xl text-outline-variant/20">06</span>
+        <h4 class="font-code text-code text-primary font-bold mb-sm">Phase 6: Certification Support</h4>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Assisting the notified body during the formal assessment and certification process.</p>
+        <span class="font-label-caps text-label-caps text-secondary block mb-xs">Deliverables:</span>
+        <ul class="list-disc pl-sm font-body-sm text-body-sm text-on-surface">
+          <li>Technical Construction File (TCF)</li>
+          <li>Safety Manual</li>
+          <li>Notified Body Queries Management</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto py-xl border-t border-outline-variant/30">
+    <div class="mb-lg">
+      <h2 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-xs">Knowledge Base</h2>
+      <h3 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary">Frequently Asked Questions</h3>
+    </div>
+    <div class="space-y-sm">
+      <details class="group bg-surface-container border border-outline-variant/50 rounded-lg p-md open:bg-surface-container-high transition-colors">
+        <summary class="flex justify-between items-center cursor-pointer font-code text-code text-primary font-bold marker:content-none">
+          What is the difference between EN 50271 and SIL (IEC 61508)?
+          <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+        </summary>
+        <div class="mt-md font-body-sm text-body-sm text-on-surface-variant">
+          <p>EN 50271 is a product-specific standard for gas detection apparatus using software or digital technologies. It prescribes specific requirements for software architecture, coding, and documentation for this domain.</p>
+          <p class="mt-xs">IEC 61508 is a generic functional safety standard covering electrical/electronic/programmable electronic safety-related systems across all industries, defining Safety Integrity Levels (SIL). While EN 50271 shares concepts with SIL 1 (and sometimes SIL 2), it is tailored specifically for gas detectors. A product meeting EN 50271 has a strong foundation if subsequent SIL certification is desired.</p>
+        </div>
+      </details>
+      <details class="group bg-surface-container border border-outline-variant/50 rounded-lg p-md open:bg-surface-container-high transition-colors">
+        <summary class="flex justify-between items-center cursor-pointer font-code text-code text-primary font-bold marker:content-none">
+          Do you guarantee certification?
+          <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+        </summary>
+        <div class="mt-md font-body-sm text-body-sm text-on-surface-variant">
+          <p>Certification is ultimately granted by an independent Notified Body (e.g., Sira, Baseefa, UL, CSA). Therefore, no engineering consultancy can legally 'guarantee' certification upfront.</p>
+          <p class="mt-xs">However, we guarantee that our design and documentation processes comply with the target standards. We build the Technical Construction File (TCF) specifically to satisfy the Notified Body's scrutiny, and we support you through the assessment process to address any technical queries raised by the assessors.</p>
+        </div>
+      </details>
+      <details class="group bg-surface-container border border-outline-variant/50 rounded-lg p-md open:bg-surface-container-high transition-colors">
+        <summary class="flex justify-between items-center cursor-pointer font-code text-code text-primary font-bold marker:content-none">
+          Can you retrofit safety standards to our existing product?
+          <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+        </summary>
+        <div class="mt-md font-body-sm text-body-sm text-on-surface-variant">
+          <p>Retrofitting safety standards (like EN 50271) to an existing commercial product is generally very difficult. Safety standards require the development process (requirements, design, traceability) to be documented *before* coding begins.</p>
+          <p class="mt-xs">We typically perform a Gap Assessment on the existing product. Often, it requires a significant rewrite of the software or a redesign of the hardware to implement the necessary fail-safe mechanisms and create the required documentary evidence trail retrospectively.</p>
+        </div>
+      </details>
     </div>
   </section>
 
