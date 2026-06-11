@@ -982,8 +982,17 @@
     .cy-faq-section { background: var(--white); padding: 100px 0; }
 
     .cy-faq-grid {
-      max-width: 800px; margin: 0 auto;
-      display: flex; flex-direction: column; gap: 14px;
+      max-width: 1200px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media (min-width: 992px) {
+      .cy-faq-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
     }
 
     .cy-faq-item {
@@ -1934,6 +1943,18 @@
 
         <div class="cy-faq-item">
           <button class="cy-faq-question">
+            <span>What types of products fall under the CRA?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              Products with Digital Elements (PDEs), including software, firmware, cloud systems, and SDKs. This encompasses both hardware with embedded software (IoT devices, smart sensors, industrial controllers) and standalone software products. <strong>If your product contains any form of digital logic or code, it likely falls under the CRA.</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
             <span>Does the CRA apply to my product if it connects to an app via Bluetooth only?</span>
             <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
           </button>
@@ -1952,6 +1973,62 @@
           <div class="cy-faq-answer">
             <div class="cy-faq-answer-inner">
               Products already on the market before full enforcement (October 2027) have transition protection — they are not immediately required to be withdrawn. However, <strong>any product placed (or re-placed) on the market after October 2027 must be CRA compliant</strong>, even if it is an updated version of an existing product. This means that if you release a new firmware version, new hardware revision, or market the product to a new customer after the enforcement date, compliance is required. Starting your compliance programme now (especially the gap assessment and threat model) avoids the October 2027 crunch and positions you ahead of competitors still scrambling.
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>Are software-only products included?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              Yes. Standalone software is explicitly covered, even if it's not pre-installed on hardware. This includes mobile apps, desktop applications, cloud services, firmware images distributed separately, and software development kits (SDKs). <strong>The CRA does not distinguish between software embedded in hardware and software distributed independently.</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>When does the CRA take effect?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              <strong>Key dates:</strong>
+              <br/><br/>
+              <strong>November 2024:</strong> CRA officially in force
+              <br/>
+              <strong>September 2026:</strong> Vulnerability and incident reporting obligations begin
+              <br/>
+              <strong>October 2027:</strong> Full compliance required for all products placed on the EU market
+              <br/><br/>
+              Products already on the market before October 2027 are not immediately required to be withdrawn, but any new versions, updates, or re-placements after this date must be fully compliant.
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>Who must comply with the CRA?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              The CRA impacts a broad range of stakeholders: <strong>manufacturers</strong> (those who develop or have products developed), <strong>authorized representatives</strong> (EU-based entities representing non-EU manufacturers), <strong>importers</strong> (bringing products from outside the EU), <strong>distributors</strong> (making products available on the market), and <strong>software developers</strong> (including open-source contributors engaged in commercial activity). If you design, sell, or distribute connected products in the EU, compliance is mandatory.
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>What are the main obligations under the CRA?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              <strong>Risk assessments</strong> (threat modelling and TARA), implementing <strong>secure-by-design principles</strong> (EN 18031 series), <strong>vulnerability handling</strong> (disclosure, patching, ENISA reporting), <strong>conformity assessments</strong> (self-assessment or Notified Body depending on class), maintaining <strong>technical documentation</strong> (SBOM, security architecture, test results), and providing <strong>security updates for minimum 5 years</strong>. All of these must be documented and demonstrable during market surveillance.
             </div>
           </div>
         </div>
@@ -1982,6 +2059,90 @@
               <strong>2. Organisation:</strong> You must maintain the engineering capability (internal or contracted) to identify and release security patches over this period.
               <br/><br/>
               <strong>3. Disclosure:</strong> If you are ending support earlier than 5 years, you must clearly disclose this in product documentation at time of sale. We design OTA update mechanisms into products as a CRA prerequisite, not as an afterthought.
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>What goes in the technical documentation?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              The technical file must include: <strong>TARA results</strong> (Threat Analysis and Risk Assessment), <strong>SBOM</strong> (Software Bill of Materials in SPDX or CycloneDX format), <strong>security update strategy</strong> (how patches will be delivered over 5+ years), <strong>conformity assessment details</strong> (test results, certificates), <strong>vulnerability disclosure procedures</strong>, and evidence of compliance with EN 18031 series standards. This documentation must be maintained for 10 years after the last product is placed on the market.
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>How is compliance assessed?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              It varies by risk category. <strong>Default and Important Class I products</strong> can use self-assessment (Module A internal control) where the manufacturer prepares the technical file and Declaration of Conformity without third-party involvement. <strong>Important Class II and Critical products</strong> require a Notified Body to review the technical documentation and issue an EU-type examination certificate. Choosing harmonised standards (EN 18031) simplifies the process and provides presumption of conformity.
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>Can I reuse existing certifications like EUCC or SESIP?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              Partially — they help demonstrate security posture, but don't automatically fulfill all CRA obligations. <strong>EUCC</strong> (EU Common Criteria) and <strong>SESIP</strong> (Security Evaluation Standard for IoT Platforms) focus on product-level security evaluation, which overlaps with CRA requirements. However, the CRA also requires process compliance (secure development lifecycle, vulnerability management, ongoing support obligations) that these certifications don't cover. You can leverage existing certificates as evidence but must still address CRA-specific gaps.
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>What does a Notified Body do?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              A Notified Body is an independent third-party organization designated by an EU Member State to evaluate <strong>Important Class II and Critical products</strong>. They review your technical documentation, assess conformity to essential requirements, and issue an EU-type examination certificate if compliant. Notified Bodies must be accredited and listed in the NANDO (New Approach Notified and Designated Organizations) database. Manufacturers of lower-risk products (Default or Important Class I) don't need a Notified Body unless they opt for third-party assessment voluntarily.
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>What if I don't comply with the CRA?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              Non-compliance carries serious consequences: <strong>financial penalties</strong> (up to €15 million or 2.5% of global annual turnover, whichever is higher), <strong>product bans</strong> (market surveillance authorities can order withdrawal or recall), <strong>reputational damage</strong> (public non-compliance notices), and <strong>inability to apply CE marking</strong> (which blocks EU market access entirely). Additionally, companies may face civil liability if a security incident occurs due to non-compliance.
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>How does the CRA affect CE marking?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              CRA compliance is <strong>required for CE marking of digital products</strong> placed on the EU market. After October 2027, you cannot affix the CE mark to a product with digital elements unless it meets CRA essential requirements. The CE marking indicates conformity to all applicable EU legislation — the CRA becomes part of that legislative framework. Without a valid Declaration of Conformity covering CRA obligations, the CE mark is legally invalid.
+            </div>
+          </div>
+        </div>
+
+        <div class="cy-faq-item">
+          <button class="cy-faq-question">
+            <span>Do non-EU companies need to comply with the CRA?</span>
+            <div class="cy-faq-icon"><i class="fas fa-plus"></i></div>
+          </button>
+          <div class="cy-faq-answer">
+            <div class="cy-faq-answer-inner">
+              Yes. If you're a non-EU manufacturer selling into the European market, you must <strong>appoint an authorized representative established in the EU</strong> and fully meet CRA requirements before placing products on the market. The authorized representative acts as your legal point of contact for EU authorities and shares certain compliance responsibilities. This applies whether you sell directly, through distributors, or via online marketplaces.
             </div>
           </div>
         </div>
