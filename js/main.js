@@ -212,6 +212,7 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
 
 // ---- CONTACT FORM ----
 const contactForm = document.getElementById('contactForm');
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mljrbpgy';
 
 if (contactForm) {
   contactForm.addEventListener('submit', function (e) {
@@ -261,7 +262,7 @@ if (contactForm) {
 
     if (!valid) return;
 
-    // Simulate submission
+    // Send to Formspree
     const submitBtn = document.getElementById('submitBtn');
     const btnText = submitBtn.querySelector('.btn-text');
     const btnLoading = submitBtn.querySelector('.btn-loading');
@@ -273,11 +274,29 @@ if (contactForm) {
     if (btnLoading) btnLoading.style.display = 'inline-flex';
     if (btnIcon) btnIcon.style.display = 'none';
 
-    setTimeout(() => {
-      submitBtn.style.display = 'none';
-      if (formSuccess) formSuccess.style.display = 'block';
-      contactForm.reset();
-    }, 2000);
+    fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      body: new FormData(contactForm),
+      headers: {
+        Accept: 'application/json'
+      }
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Submission failed');
+        }
+
+        submitBtn.style.display = 'none';
+        if (formSuccess) formSuccess.style.display = 'block';
+        contactForm.reset();
+      })
+      .catch(() => {
+        submitBtn.disabled = false;
+        if (btnText) btnText.style.display = 'inline';
+        if (btnLoading) btnLoading.style.display = 'none';
+        if (btnIcon) btnIcon.style.display = 'inline-block';
+        window.alert('Message could not be sent. Please try again.');
+      });
   });
 
   // Real-time validation
