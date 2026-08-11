@@ -281,21 +281,32 @@ if (contactForm) {
         Accept: 'application/json'
       }
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Submission failed');
+      .then(async (response) => {
+        let data = {};
+        try {
+          data = await response.json();
+        } catch (_err) {
+          data = {};
+        }
+
+        if (!response.ok || data.ok === false) {
+          const apiErrors = Array.isArray(data.errors)
+            ? data.errors.map((err) => err.message).join(' | ')
+            : '';
+          const message = apiErrors || data.error || 'Submission failed';
+          throw new Error(message);
         }
 
         submitBtn.style.display = 'none';
         if (formSuccess) formSuccess.style.display = 'block';
         contactForm.reset();
       })
-      .catch(() => {
+      .catch((error) => {
         submitBtn.disabled = false;
         if (btnText) btnText.style.display = 'inline';
         if (btnLoading) btnLoading.style.display = 'none';
         if (btnIcon) btnIcon.style.display = 'inline-block';
-        window.alert('Message could not be sent. Please try again.');
+        window.alert(`Message could not be sent: ${error.message}`);
       });
   });
 
