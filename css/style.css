@@ -590,46 +590,107 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .about-card-main {
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
   border-radius: var(--radius-xl);
-  padding: 40px;
+  padding: 28px;
   border: 1px solid rgba(0,180,219,0.15);
   box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-card-main::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top right, rgba(46, 204, 113, 0.16), transparent 32%),
+    radial-gradient(circle at bottom left, rgba(21, 101, 192, 0.24), transparent 42%);
+  pointer-events: none;
 }
 
 .about-icon-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 14px;
+  position: relative;
+  z-index: 1;
 }
 
 .icon-cell {
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-md);
+  border-radius: 18px;
   aspect-ratio: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  /*color: var(--cyan);*/
   transition: var(--transition);
 }
 
 .icon-cell:hover {
-  background: rgba(0,180,219,0.15);
+  background: rgba(0,180,219,0.12);
   border-color: rgba(0,180,219,0.4);
-  transform: scale(1.05);
+  transform: translateY(-4px);
+}
+
+.about-skill-card {
+  padding: 18px 16px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.about-skill-icon {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #56f0c3;
+  font-size: 18px;
+}
+
+.about-skill-card h3,
+.center-brand-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--white);
+}
+
+.about-skill-card p,
+.center-brand-card p {
+  font-size: 12px;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.68);
 }
 
 .icon-cell.center-cell {
   background: linear-gradient(135deg, var(--cyan), var(--blue));
   border-color: var(--cyan);
+  box-shadow: 0 18px 40px rgba(21, 101, 192, 0.35);
 }
 
-.icon-cell.center-cell img {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-  filter: brightness(10);
+.center-brand-card {
+  padding: 18px 16px 16px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.16);
+  color: var(--white);
+  font-size: 22px;
+  font-weight: 800;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
 }
 
 .about-float-badge {
@@ -637,36 +698,41 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex;
   align-items: center;
   gap: 12px;
-  background: var(--white);
+  background: rgba(24, 35, 24, 0.92);
   border-radius: var(--radius-md);
-  padding: 14px 20px;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--bg-dark);
+  padding: 12px 18px;
+  box-shadow: 0 14px 30px rgba(10,27,46,0.28);
+  border: 1px solid rgba(46,204,113,0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 2;
 }
 
 .badge-top {
-  top: -20px; right: -20px;
+  top: -18px;
+  right: 12px;
 }
 
 .badge-bottom {
-  bottom: -20px; left: -20px;
+  bottom: -20px;
+  left: -20px;
 }
 
 .about-float-badge i {
-  font-size: 22px;
-  color: var(--cyan);
+  font-size: 18px;
+  color: #7cf59f;
 }
 
 .about-float-badge strong {
   display: block;
   font-size: 13px;
   font-weight: 700;
-  color: var(--text-dark);
+  color: var(--white);
 }
 
 .about-float-badge span {
   font-size: 11px;
-  color: var(--text-light);
+  color: rgba(255,255,255,0.72);
 }
 
 .about-content .section-title { text-align: left; }
@@ -1809,6 +1875,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     opacity: 0.6;
   }
   .about-grid { gap: 48px; }
+  .about-icon-grid { grid-template-columns: repeat(2, 1fr); }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .values-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
@@ -1868,6 +1935,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .about-visual { order: -1; }
   .about-card-main { padding: 28px; }
+  .about-icon-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .about-skill-card,
+  .center-brand-card { aspect-ratio: auto; min-height: 150px; }
   .badge-top { top: -10px; right: 0; }
   .badge-bottom { bottom: -10px; left: 0; }
   .services-grid { grid-template-columns: 1fr; }
@@ -1887,6 +1957,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .hero-title { font-size: 38px; }
   .stat-number { font-size: 28px; }
   .hero-stats { gap: 20px; }
+  .about-icon-grid { grid-template-columns: 1fr; }
+  .about-float-badge {
+    position: static;
+    margin-top: 16px;
+  }
   .about-content .section-title { font-size: 28px; }
 }
 
