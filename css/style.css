@@ -578,13 +578,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  gap: 56px;
   align-items: center;
 }
 
 .about-visual {
   position: relative;
+  width: 100%;
+  max-width: 760px;
 }
 
 .about-card-main {
@@ -621,7 +623,26 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border-radius: 18px;
   aspect-ratio: 1;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 18px 16px 16px;
+  gap: 14px;
+  color: var(--white);
   transition: var(--transition);
+}
+
+.icon-cell h3 {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--white);
+}
+
+.icon-cell p {
+  font-size: 12px;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.7);
 }
 
 .icon-cell:hover {
@@ -631,11 +652,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .about-skill-card {
-  padding: 18px 16px 16px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 14px;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
 }
 
@@ -651,16 +667,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .about-skill-card h3,
 .center-brand-card h3 {
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.2;
   color: var(--white);
 }
 
 .about-skill-card p,
 .center-brand-card p {
-  font-size: 12px;
-  line-height: 1.35;
   color: rgba(255,255,255,0.68);
 }
 
@@ -671,8 +682,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .center-brand-card {
-  padding: 18px 16px 16px;
-  flex-direction: column;
+  padding: 16px;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -1866,6 +1876,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* ============================================================
    RESPONSIVE DESIGN
    ============================================================ */
+
+/* Desktop Narrow */
+@media (max-width: 1240px) {
+  .about-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 44px;
+  }
+  .about-visual {
+    max-width: 100%;
+  }
+}
 
 /* Tablet */
 @media (max-width: 1024px) {
