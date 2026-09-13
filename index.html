@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mikro Pixel Studios — game studio</title>
+<meta name="description" content="Mikro Pixel Studios is a small game studio putting everything it has into one game. In production, no date yet.">
+<meta property="og:title" content="Mikro Pixel Studios">
+<meta property="og:description" content="A small game studio putting everything it has into one game. In production, no date yet.">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/png" href="assets/img/mark-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="assets/img/mark-light.png" media="(prefers-color-scheme: light)">
+<link rel="apple-touch-icon" href="assets/img/mark-dark.png">
+<meta name="theme-color" content="#0E0D0D">
+<script src="assets/js/theme-init.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+
+<!-- Paper grain filter -->
+<svg class="grain" aria-hidden="true" preserveAspectRatio="none">
+  <filter id="grainNoise">
+    <feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="3" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grainNoise)" opacity="0.11"/>
+</svg>
+
+<div class="shell">
+
+  <header class="top lift" style="--d:0ms">
+    <a class="mark" href="#top" aria-label="Mikro Pixel Studios, home">
+      <span class="mark__marks">
+        <img class="only-dark"  src="assets/img/mark-dark.png" alt="" aria-hidden="true">
+        <img class="only-light" src="assets/img/mark-light.png" alt="" aria-hidden="true">
+      </span>
+      <span class="mark__words">
+        <img class="mark__word only-dark"  src="assets/img/mark-word-dark.png" alt="" aria-hidden="true">
+        <img class="mark__word only-light" src="assets/img/mark-word-light.png" alt="" aria-hidden="true">
+      </span>
+    </a>
+    <p class="status"><span class="status__dot" aria-hidden="true"></span>in production</p>
+    <nav class="top__nav" aria-label="Main">
+      <a class="navlink" href="#standing">Studio</a>
+      <a class="navlink" href="#contact">Contact</a>
+    </nav>
+    <div class="themer" role="radiogroup" aria-label="Colour theme" id="themer">
+      <button class="themer__opt" type="button" role="radio" aria-checked="false" data-set="light" title="Day">
+        <span class="vh">Day</span>
+        <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+          <circle cx="8" cy="8" r="3.1"/>
+          <path d="M8 1v1.7M8 13.3V15M15 8h-1.7M2.7 8H1M12.95 3.05l-1.2 1.2M4.25 11.75l-1.2 1.2M12.95 12.95l-1.2-1.2M4.25 4.25l-1.2-1.2"/>
+        </svg>
+      </button>
+      <button class="themer__opt" type="button" role="radio" aria-checked="false" data-set="dark" title="Night">
+        <span class="vh">Night</span>
+        <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true">
+          <path d="M13.4 9.8A5.9 5.9 0 0 1 6.2 2.6 5.9 5.9 0 1 0 13.4 9.8Z"/>
+        </svg>
+      </button>
+      <button class="themer__opt" type="button" role="radio" aria-checked="false" data-set="auto" title="Match system">
+        <span class="vh">Match system</span>
+        <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <circle cx="8" cy="8" r="5.6"/>
+          <path d="M8 2.4a5.6 5.6 0 0 1 0 11.2Z" fill="currentColor" stroke="none"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <section class="hero">
+      <h1 class="hero__title lift" style="--d:90ms">
+        <span>Everything we have</span>
+        <span>is going into</span>
+        <span>one game.</span>
+      </h1>
+
+      <p class="hero__body lift" style="--d:200ms">
+        Mikro Pixel Studios makes games. Right now we're deep in the stretch
+        nobody puts in a trailer. What's below is a <b>blockout</b> — the grey
+        boxes a level is built from before it looks like anything. It's the most
+        honest thing we can show you today. Drag it around.
+      </p>
+
+      <figure class="viewport lift" style="--d:310ms" id="viewport">
+        <div class="viewport__stage" id="stage">
+          <canvas id="scene" aria-label="An interactive 3D blockout: grey placeholder boxes on a grid. Drag to change the camera angle."></canvas>
+          <div class="viewport__glass" aria-hidden="true"></div>
+          <p class="viewport__hint">drag to look around</p>
+        </div>
+        <dl class="readout">
+          <div><dt>scene</dt><dd>untitled_01</dd></div>
+          <div><dt>objects</dt><dd id="r-objects">0</dd></div>
+          <div><dt>materials</dt><dd>0</dd></div>
+          <div><dt>build</dt><dd>blockout</dd></div>
+          <div><dt>res</dt><dd id="r-res">—</dd></div>
+        </dl>
+      </figure>
+    </section>
+
+    <section class="standing" id="standing">
+      <h2 class="standing__head">Where things stand</h2>
+      <dl class="facts">
+        <div class="facts__row">
+          <dt>The team</dt>
+          <dd>Small on purpose. Everyone here is full time on the same thing, which is the only way a team this size finishes anything.</dd>
+        </div>
+        <div class="facts__row">
+          <dt>The game</dt>
+          <dd>One project, in production. We'll say what it is when we're sure we can finish it — not a week earlier.</dd>
+        </div>
+        <div class="facts__row">
+          <dt>The date</dt>
+          <dd>No date yet, and we'd rather tell you that than invent one. When it exists, it lands here before anywhere else.</dd>
+        </div>
+        <div class="facts__row">
+          <dt>This page</dt>
+          <dd>Deliberately thin. It fills out as the game does — screens, then a name, then a date, in roughly that order.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="signup" id="contact">
+      <h2 class="signup__title">Be first to see it</h2>
+      <p class="signup__note">
+        We're impatient to show you. Just not impatient enough to show you early.
+        One email when there's something real — nothing else, ever.
+      </p>
+
+      <form class="form" id="signup" novalidate>
+        <label class="vh" for="email">Email address</label>
+        <input class="field" id="email" name="email" type="email"
+               placeholder="you@somewhere.com" autocomplete="email" required>
+        <button class="btn" type="submit" id="submit">Keep me posted</button>
+        <p class="form__reply" id="reply" role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="signup__alt">
+        Or write to us directly at <a href="mailto:hello@mikropixel.studio">hello@mikropixel.studio</a>.
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <div class="foot__logo">
+      <img class="only-dark"  src="assets/img/footer-mark-dark.png" alt="" aria-hidden="true">
+      <img class="only-light" src="assets/img/footer-mark-light.png" alt="" aria-hidden="true">
+    </div>
+    <div class="foot__meta">
+      <span>&copy; <span id="year">2026</span> Mikro Pixel Studios</span>
+      <nav class="foot__links" aria-label="Elsewhere">
+        <a href="#">Bluesky</a>
+        <a href="#">Discord</a>
+        <a href="#">Press</a>
+      </nav>
+    </div>
+  </footer>
+
+</div>
+
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
