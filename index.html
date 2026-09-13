@@ -1,1018 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Mikronexis – Connecting Ideas to Reality. Engineering-driven technology consulting and product engineering company specializing in software, embedded systems, and hardware solutions." />
-  <meta name="keywords" content="Mikronexis, software consulting, embedded systems, hardware design, mobile development, web development, IoT, firmware, PCB design" />
-  <title>Mikronexis – Connecting Ideas to Reality</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mikro Pixel Studios — game studio</title>
+<meta name="description" content="Mikro Pixel Studios is a small game studio putting everything it has into one game. In production, no date yet.">
+<meta property="og:title" content="Mikro Pixel Studios">
+<meta property="og:description" content="A small game studio putting everything it has into one game. In production, no date yet.">
+<meta property="og:type" content="website">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/png" href="assets/img/mark-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="assets/img/mark-light.png" media="(prefers-color-scheme: light)">
+<link rel="apple-touch-icon" href="assets/img/mark-dark.png">
+<meta name="theme-color" content="#0E0D0D">
+<script src="assets/js/theme-init.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css" />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assests/logo_dark.png" />
+<link rel="stylesheet" href="assets/css/styles.css">
 </head>
+
 <body>
 
-  <!-- ========== PRELOADER ========== -->
-  <div id="preloader">
-    <div class="preloader-inner">
-      <img src="assests/logo_dark.png" alt="Mikronexis" class="preloader-logo" />
-      <div class="preloader-bar"><span></span></div>
-    </div>
-  </div>
+<!-- Paper grain filter -->
+<svg class="grain" aria-hidden="true" preserveAspectRatio="none">
+  <filter id="grainNoise">
+    <feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="3" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grainNoise)" opacity="0.11"/>
+</svg>
 
-  <!-- ========== NAVIGATION ========== -->
-  <nav id="navbar">
-    <div class="nav-container">
-      <a href="#home" class="nav-logo">
-        <img src="assests/logo_dark.png" alt="Mikronexis Logo" class="logo-img" />
-      </a>
+<div class="shell">
 
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
+  <header class="top lift" style="--d:0ms">
+    <a class="mark" href="#top" aria-label="Mikro Pixel Studios, home">
+      <span class="mark__marks">
+        <img class="only-dark"  src="assets/img/mark-dark.png" alt="" aria-hidden="true">
+        <img class="only-light" src="assets/img/mark-light.png" alt="" aria-hidden="true">
+      </span>
+      <span class="mark__words">
+        <img class="mark__word only-dark"  src="assets/img/mark-word-dark.png" alt="" aria-hidden="true">
+        <img class="mark__word only-light" src="assets/img/mark-word-light.png" alt="" aria-hidden="true">
+      </span>
+    </a>
+    <p class="status"><span class="status__dot" aria-hidden="true"></span>in production</p>
+    <nav class="top__nav" aria-label="Main">
+      <a class="navlink" href="#standing">Studio</a>
+      <a class="navlink" href="#contact">Contact</a>
+    </nav>
+    <div class="themer" role="radiogroup" aria-label="Colour theme" id="themer">
+      <button class="themer__opt" type="button" role="radio" aria-checked="false" data-set="light" title="Day">
+        <span class="vh">Day</span>
+        <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+          <circle cx="8" cy="8" r="3.1"/>
+          <path d="M8 1v1.7M8 13.3V15M15 8h-1.7M2.7 8H1M12.95 3.05l-1.2 1.2M4.25 11.75l-1.2 1.2M12.95 12.95l-1.2-1.2M4.25 4.25l-1.2-1.2"/>
+        </svg>
       </button>
-
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home" class="nav-link active">Home</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#services" class="nav-link">Services</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#why-us" class="nav-link">Why Us</a></li>
-        <li><a href="#market" class="nav-link">Industries</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-        <li><a href="#contact" class="nav-cta-btn">Get Started</a></li>
-      </ul>
+      <button class="themer__opt" type="button" role="radio" aria-checked="false" data-set="dark" title="Night">
+        <span class="vh">Night</span>
+        <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true">
+          <path d="M13.4 9.8A5.9 5.9 0 0 1 6.2 2.6 5.9 5.9 0 1 0 13.4 9.8Z"/>
+        </svg>
+      </button>
+      <button class="themer__opt" type="button" role="radio" aria-checked="false" data-set="auto" title="Match system">
+        <span class="vh">Match system</span>
+        <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <circle cx="8" cy="8" r="5.6"/>
+          <path d="M8 2.4a5.6 5.6 0 0 1 0 11.2Z" fill="currentColor" stroke="none"/>
+        </svg>
+      </button>
     </div>
-  </nav>
+  </header>
 
-  <!-- ========== HERO SECTION ========== -->
-  <section id="home" class="hero-section">
-    <div class="hero-bg-grid"></div>
-    <div class="hero-particles" id="heroParticles"></div>
+  <main id="top">
 
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        Trusted by Startups &amp; Product Companies
-      </div>
-
-      <h1 class="hero-title">
-        Connecting<br />
-        <span class="gradient-text">Ideas to Reality</span>
+    <section class="hero">
+      <h1 class="hero__title lift" style="--d:90ms">
+        <span>Everything we have</span>
+        <span>is going into</span>
+        <span>one game.</span>
       </h1>
 
-      <p class="hero-subtitle">
-        Mikronexis is an engineering-driven technology company specializing in building intelligent systems
-        across software, embedded systems, and hardware. From GPS vehicle trackers and wearable health bands to
-        App Store-published IoT apps — we build real, shipped products.
+      <p class="hero__body lift" style="--d:200ms">
+        Mikro Pixel Studios makes games. Right now we're deep in the stretch
+        nobody puts in a trailer. What's below is a <b>blockout</b> — the grey
+        boxes a level is built from before it looks like anything. It's the most
+        honest thing we can show you today. Drag it around.
       </p>
 
-      <div class="hero-actions">
-        <a href="#services" class="btn btn-primary">
-          Explore Services <i class="fas fa-arrow-right"></i>
-        </a>
-        <a href="#contact" class="btn btn-outline">
-          Let's Talk <i class="fas fa-comments"></i>
-        </a>
-      </div>
+      <figure class="viewport lift" style="--d:310ms" id="viewport">
+        <div class="viewport__stage" id="stage">
+          <canvas id="scene" aria-label="An interactive 3D blockout: grey placeholder boxes on a grid. Drag to change the camera angle."></canvas>
+          <div class="viewport__glass" aria-hidden="true"></div>
+          <p class="viewport__hint">drag to look around</p>
+        </div>
+        <dl class="readout">
+          <div><dt>scene</dt><dd>untitled_01</dd></div>
+          <div><dt>objects</dt><dd id="r-objects">0</dd></div>
+          <div><dt>materials</dt><dd>0</dd></div>
+          <div><dt>build</dt><dd>blockout</dd></div>
+          <div><dt>res</dt><dd id="r-res">—</dd></div>
+        </dl>
+      </figure>
+    </section>
 
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-number-row">
-            <span class="stat-number" data-target="5">0</span><span class="stat-suffix">+</span>
-          </div>
-          <span class="stat-label">Service Domains</span>
+    <section class="standing" id="standing">
+      <h2 class="standing__head">Where things stand</h2>
+      <dl class="facts">
+        <div class="facts__row">
+          <dt>The team</dt>
+          <dd>Small on purpose. Everyone here is full time on the same thing, which is the only way a team this size finishes anything.</dd>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <div class="stat-number-row">
-            <span class="stat-number" data-target="100">0</span><span class="stat-suffix">%</span>
-          </div>
-          <span class="stat-label">Quality Focus</span>
+        <div class="facts__row">
+          <dt>The game</dt>
+          <dd>One project, in production. We'll say what it is when we're sure we can finish it — not a week earlier.</dd>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <div class="stat-number-row">
-            <span class="stat-number" data-target="360">0</span><span class="stat-suffix">°</span>
-          </div>
-          <span class="stat-label">Full-Stack Engineering</span>
+        <div class="facts__row">
+          <dt>The date</dt>
+          <dd>No date yet, and we'd rather tell you that than invent one. When it exists, it lands here before anywhere else.</dd>
         </div>
-      </div>
+        <div class="facts__row">
+          <dt>This page</dt>
+          <dd>Deliberately thin. It fills out as the game does — screens, then a name, then a date, in roughly that order.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="signup" id="contact">
+      <h2 class="signup__title">Be first to see it</h2>
+      <p class="signup__note">
+        We're impatient to show you. Just not impatient enough to show you early.
+        One email when there's something real — nothing else, ever.
+      </p>
+
+      <form class="form" id="signup" novalidate>
+        <label class="vh" for="email">Email address</label>
+        <input class="field" id="email" name="email" type="email"
+               placeholder="you@somewhere.com" autocomplete="email" required>
+        <button class="btn" type="submit" id="submit">Keep me posted</button>
+        <p class="form__reply" id="reply" role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="signup__alt">
+        Or write to us directly at <a href="mailto:hello@mikropixel.studio">hello@mikropixel.studio</a>.
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <div class="foot__logo">
+      <img class="only-dark"  src="assets/img/footer-mark-dark.png" alt="" aria-hidden="true">
+      <img class="only-light" src="assets/img/footer-mark-light.png" alt="" aria-hidden="true">
     </div>
-
-    <div class="hero-banner">
-      <div class="banner-glow"></div>
-      <img src="assests/mikronexisBannerOnly2.png" alt="Mikronexis Banner" class="banner-image" />
-    </div>
-
-    <div class="hero-scroll-hint">
-      <span>Scroll to explore</span>
-      <div class="scroll-arrow"><i class="fas fa-chevron-down"></i></div>
-    </div>
-  </section>
-
-  <!-- ========== TECH STRIP ========== -->
-  <div class="tech-strip">
-    <div class="strip-track">
-      <span><i class="fab fa-android"></i> Android</span>
-      <span><i class="fab fa-apple"></i> iOS</span>
-      <span><i class="fas fa-globe"></i> Web Apps</span>
-      <span><i class="fas fa-desktop"></i> Desktop</span>
-      <span><i class="fas fa-microchip"></i> Firmware</span>
-      <span><i class="fas fa-wifi"></i> IoT</span>
-      <span><i class="fas fa-circuit-board"></i> PCB Design</span>
-      <span><i class="fas fa-server"></i> Backend & APIs</span>
-      <span><i class="fas fa-brain"></i> AI / ML</span>
-      <span><i class="fas fa-triangle-exclamation"></i> Safety Critical</span>
-      <span><i class="fas fa-shield-halved"></i> CRA Compliance</span>
-      <span><i class="fab fa-android"></i> Android</span>
-      <span><i class="fab fa-apple"></i> iOS</span>
-      <span><i class="fas fa-globe"></i> Web Apps</span>
-      <span><i class="fas fa-desktop"></i> Desktop</span>
-      <span><i class="fas fa-microchip"></i> Firmware</span>
-      <span><i class="fas fa-wifi"></i> IoT</span>
-      <span><i class="fas fa-circuit-board"></i> PCB Design</span>
-      <span><i class="fas fa-server"></i> Backend &amp; APIs</span>
-      <span><i class="fas fa-brain"></i> AI / ML</span>
-      <span><i class="fas fa-triangle-exclamation"></i> Safety Critical</span>
-      <span><i class="fas fa-shield-halved"></i> CRA Compliance</span>
-    </div>
-  </div>
-
-  <!-- ========== ABOUT SECTION ========== -->
-  <section id="about" class="about-section section">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-visual" data-aos="fade-right">
-          <div class="about-card-main">
-            <div class="about-icon-grid">
-              <article class="icon-cell about-skill-card">
-                <div class="about-skill-icon"><i class="fas fa-microchip"></i></div>
-                <h3>Firmware</h3>
-                <p>Embedded software</p>
-              </article>
-              <article class="icon-cell about-skill-card">
-                <div class="about-skill-icon"><i class="fas fa-ruler-combined"></i></div>
-                <h3>BLE &amp; Sensors</h3>
-                <p>Connected hardware</p>
-              </article>
-              <article class="icon-cell about-skill-card">
-                <div class="about-skill-icon"><i class="fas fa-vector-square"></i></div>
-                <h3>PCB design</h3>
-                <p>Hardware layout</p>
-              </article>
-              <article class="icon-cell about-skill-card">
-                <div class="about-skill-icon"><i class="far fa-clone"></i></div>
-                <h3>Mobile &amp; Web</h3>
-                <p>Companion apps</p>
-              </article>
-              <article class="icon-cell center-cell center-brand-card">
-                <div class="brand-mark">M</div>
-                <h3>MikroNexis</h3>
-                <p>Where it connects</p>
-              </article>
-              <article class="icon-cell about-skill-card">
-                <div class="about-skill-icon"><i class="fas fa-shield-halved"></i></div>
-                <h3>Cybersecurity</h3>
-                <p>Device hardening</p>
-              </article>
-              <article class="icon-cell about-skill-card">
-                <div class="about-skill-icon"><i class="fas fa-cloud"></i></div>
-                <h3>Cloud &amp; IoT</h3>
-                <p>Connectivity layer</p>
-              </article>
-              <article class="icon-cell about-skill-card">
-                <div class="about-skill-icon"><i class="fas fa-screwdriver-wrench"></i></div>
-                <h3>Mechanical</h3>
-                <p>MCAD design</p>
-              </article>
-              <article class="icon-cell about-skill-card">
-                <div class="about-skill-icon"><i class="fas fa-brain"></i></div>
-                <h3>AI &amp; ML</h3>
-                <p>Smart systems</p>
-              </article>
-            </div>
-          </div>
-        </div>
-        <div class="about-content" data-aos="fade-left">
-          <div class="section-tag">About Us</div>
-          <h2 class="section-title">Who We Are</h2>
-          <p class="about-lead">
-            Mikronexis is derived from <strong>Mikro</strong> — precision and depth — and <strong>Nexis</strong> (Nexus) — connection and integration. Together, we build intelligent, connected, and scalable systems at the intersection of software and hardware.
-          </p>
-          <p class="about-body">
-            We are an engineering-driven technology consulting and product company. From mobile and web applications to firmware, embedded hardware, and IoT systems, we provide end-to-end engineering expertise that transforms complex ideas into real, working systems.
-          </p>
-
-          <div class="about-pillars">
-            <div class="pillar">
-              <div class="pillar-icon"><i class="fas fa-eye"></i></div>
-              <div>
-                <h4>Vision</h4>
-                <p>To become a globally recognized technology company delivering intelligent systems and innovative products across software and hardware domains.</p>
-              </div>
-            </div>
-            <div class="pillar">
-              <div class="pillar-icon"><i class="fas fa-bullseye"></i></div>
-              <div>
-                <h4>Mission</h4>
-                <p>To design, develop, and deliver high-quality, scalable, and efficient technology solutions that bridge software and hardware seamlessly.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="about-proof-strip">
-            <div class="proof-item"><i class="fas fa-check-circle"></i> 6 Products Built &amp; Shipped</div>
-            <div class="proof-item"><i class="fab fa-app-store-ios"></i> 2 Apps Live on App Store</div>
-            <div class="proof-item"><i class="fas fa-shield-halved"></i> EN 50271 &amp; EU CRA Ready</div>
-          </div>
-
-          <a href="#services" class="btn btn-primary mt-2">Our Services <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== SERVICES SECTION ========== -->
-  <section id="services" class="services-section section">
-    <div class="services-bg-pattern"></div>
-    <div class="container">
-      <div class="section-header" data-aos="fade-up">
-        <div class="section-tag">What We Do</div>
-        <h2 class="section-title">Our Services</h2>
-        <p class="section-sub">
-          Comprehensive engineering services from digital software to physical hardware — all under one roof.
-        </p>
-      </div>
-
-      <div class="services-grid">
-
-        <!-- Software Development -->
-        <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="service-number">01</div>
-          <div class="service-icon-wrap">
-            <i class="fas fa-code"></i>
-          </div>
-          <h3>Software Development</h3>
-          <p>Full-spectrum software engineering from mobile to web to desktop, built for performance and scalability.</p>
-          <ul class="service-list">
-            <li><i class="fab fa-android"></i> Android Applications</li>
-            <li><i class="fab fa-apple"></i> iOS Applications</li>
-            <li><i class="fas fa-globe"></i> Web Applications</li>
-            <li><i class="fas fa-desktop"></i> Desktop Software</li>
-            <li><i class="fas fa-server"></i> Backend Systems &amp; APIs</li>
-          </ul>
-          <p class="service-proof"><i class="fas fa-folder-open"></i> See in action: <a href="#projects">Air OTG &amp; OTG CO on App Store</a></p>
-          <div class="service-footer">
-            <a href="#contact" class="service-link">Discuss Project <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <!-- Embedded Systems -->
-        <div class="service-card featured" data-aos="fade-up" data-aos-delay="200">
-          <div class="service-number">02</div>
-          <div class="featured-label">Core Expertise</div>
-          <div class="service-icon-wrap">
-            <i class="fas fa-microchip"></i>
-          </div>
-          <h3>Embedded Systems</h3>
-          <p>Deep embedded engineering expertise for resource-constrained, real-time, and connected devices.</p>
-          <ul class="service-list">
-            <li><i class="fas fa-code-branch"></i> Firmware Development</li>
-            <li><i class="fas fa-clock"></i> RTOS-based Systems</li>
-            <li><i class="fas fa-wifi"></i> IoT Solutions</li>
-            <li><i class="fas fa-plug"></i> Device Integration</li>
-            <li><i class="fas fa-link"></i> Protocol Implementation</li>
-          </ul>
-          <p class="service-proof service-proof-light"><i class="fas fa-folder-open"></i> See in action: <a href="#projects">Health Band, Vehicle Tracker</a></p>
-          <div class="service-footer">
-            <a href="#contact" class="service-link">Discuss Project <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <!-- Safety Critical Devices -->
-        <div class="service-card" data-aos="fade-up" data-aos-delay="250">
-          <div class="service-number">03</div>
-          <div class="service-icon-wrap">
-            <i class="fas fa-triangle-exclamation"></i>
-          </div>
-          <h3>Safety Critical Devices</h3>
-          <p>Engineering embedded systems for hazardous environments and safety-regulated industries — certifiable, fail-safe, and production-ready.</p>
-          <ul class="service-list">
-            <li><i class="fas fa-file-shield"></i> EN 50271 Software Compliance</li>
-            <li><i class="fas fa-fire-flame-curved"></i> IEC 60079 Series — Explosive Atmospheres</li>
-            <li><i class="fas fa-sitemap"></i> Hazardous Area System Architecture</li>
-            <li><i class="fas fa-vial-circle-check"></i> Safety Validation &amp; Evidence Documentation</li>
-            <li><i class="fas fa-code-branch"></i> Fail-Safe Firmware Development</li>
-          </ul>
-          <p class="service-proof"><i class="fas fa-folder-open"></i> See in action: <a href="#projects">Gas Monitor (EN 50271 aligned)</a></p>
-          <div class="service-footer">
-            <a href="safety-critical.html" class="service-link">Explore Service <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <!-- Cybersecurity for Embedded Devices -->
-        <div class="service-card" data-aos="fade-up" data-aos-delay="350">
-          <div class="service-number">04</div>
-          <div class="service-icon-wrap">
-            <i class="fas fa-shield-halved"></i>
-          </div>
-          <h3>Cybersecurity for Embedded Devices</h3>
-          <p>Helping product companies achieve compliance with the <strong>EU Cyber Resilience Act (Regulation (EU) 2024/2847)</strong> — in force December 2024, full enforcement October 2027. We implement the EN 18031 Series and build security from silicon to cloud.</p>
-          <ul class="service-list">
-            <li><i class="fas fa-scale-balanced"></i> EU CRA Gap Assessment &amp; Roadmap</li>
-            <li><i class="fas fa-file-contract"></i> EN 18031 Series Implementation</li>
-            <li><i class="fas fa-lock"></i> Secure Boot, Code Signing &amp; Key Management</li>
-            <li><i class="fas fa-magnifying-glass-chart"></i> Threat Modeling &amp; Penetration Testing</li>
-            <li><i class="fas fa-list-check"></i> SBOM Creation &amp; Vulnerability Monitoring</li>
-            <li><i class="fas fa-certificate"></i> CE Marking &amp; Conformity Assessment Support</li>
-          </ul>
-          <div class="service-footer">
-            <a href="cybersecurity.html" class="service-link">Explore Service <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <!-- Hardware Design -->
-        <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-          <div class="service-number">05</div>
-          <div class="service-icon-wrap">
-            <i class="fas fa-cpu"></i>
-          </div>
-          <h3>Hardware Design</h3>
-          <p>From concept to prototype — embedded hardware and PCB design engineered for reliability and manufacturability.</p>
-          <ul class="service-list">
-            <li><i class="fas fa-microchip"></i> Embedded Hardware Design</li>
-            <li><i class="fas fa-drafting-compass"></i> PCB Design &amp; Prototyping</li>
-            <li><i class="fas fa-cogs"></i> System Integration</li>
-            <li><i class="fas fa-vial"></i> Hardware Testing &amp; Validation</li>
-            <li><i class="fas fa-industry"></i> Production-ready Design</li>
-          </ul>
-          <p class="service-proof"><i class="fas fa-folder-open"></i> See in action: <a href="#projects">Gas Monitor, Social Distancing Band</a></p>
-          <div class="service-footer">
-            <a href="#contact" class="service-link">Discuss Project <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <!-- Consulting -->
-        <div class="service-card" data-aos="fade-up" data-aos-delay="400">
-          <div class="service-number">06</div>
-          <div class="service-icon-wrap">
-            <i class="fas fa-lightbulb"></i>
-          </div>
-          <h3>Technology Consulting</h3>
-          <p>Strategic technology advisory to help you make the right architectural and engineering decisions from day one.</p>
-          <ul class="service-list">
-            <li><i class="fas fa-sitemap"></i> System Architecture Design</li>
-            <li><i class="fas fa-tasks"></i> Technical Roadmapping</li>
-            <li><i class="fas fa-search"></i> Technology Assessment</li>
-            <li><i class="fas fa-shield-alt"></i> Risk Analysis</li>
-            <li><i class="fas fa-handshake"></i> MVP / Prototype Strategy</li>
-          </ul>
-          <div class="service-footer">
-            <a href="#contact" class="service-link">Discuss Project <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <!-- MCAD (Optional) -->
-        <div class="service-card upcoming" data-aos="fade-up" data-aos-delay="500">
-          <div class="service-number">07</div>
-          <div class="upcoming-label">Coming Soon</div>
-          <div class="service-icon-wrap">
-            <i class="fas fa-cube"></i>
-          </div>
-          <h3>Mechanical Design (MCAD)</h3>
-          <p>Mechanical enclosure and product design for embedded hardware — bridging electronics with physical product design.</p>
-          <ul class="service-list">
-            <li><i class="fas fa-ruler-combined"></i> Enclosure Design</li>
-            <li><i class="fas fa-cube"></i> 3D Modeling</li>
-            <li><i class="fas fa-print"></i> Rapid Prototyping</li>
-            <li><i class="fas fa-th-large"></i> DFM Optimization</li>
-          </ul>
-          <div class="service-footer">
-            <span class="service-link-upcoming"><i class="fas fa-clock"></i> In Development</span>
-          </div>
-        </div>
-
-        <!-- AI / ML -->
-        <div class="service-card upcoming" data-aos="fade-up" data-aos-delay="600">
-          <div class="service-number">08</div>
-          <div class="upcoming-label">Future</div>
-          <div class="service-icon-wrap">
-            <i class="fas fa-brain"></i>
-          </div>
-          <h3>AI &amp; Machine Learning</h3>
-          <p>Intelligent automation and AI-driven solutions to elevate products with smart, adaptive capabilities.</p>
-          <ul class="service-list">
-            <li><i class="fas fa-robot"></i> Intelligent Automation</li>
-            <li><i class="fas fa-chart-line"></i> Predictive Analytics</li>
-            <li><i class="fas fa-eye"></i> Computer Vision</li>
-            <li><i class="fas fa-comments"></i> NLP Solutions</li>
-          </ul>
-          <div class="service-footer">
-            <span class="service-link-upcoming"><i class="fas fa-clock"></i> In Roadmap</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PROJECTS / PORTFOLIO ========== -->
-  <section id="projects" class="projects-section section">
-    <div class="container">
-      <div class="section-header" data-aos="fade-up">
-        <div class="section-tag">Our Work</div>
-        <h2 class="section-title">Our Work — Built &amp; Shipped</h2>
-        <p class="section-sub">Hardware shipped. Apps published. Systems deployed.</p>
-      </div>
-
-      <!-- Filter Bar -->
-      <div class="portfolio-filters" data-aos="fade-up">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="embedded">Embedded</button>
-        <button class="filter-btn" data-filter="iot">IoT</button>
-        <button class="filter-btn" data-filter="mobile">Mobile App</button>
-        <button class="filter-btn" data-filter="hardware">Hardware</button>
-        <button class="filter-btn" data-filter="safety">Safety Critical</button>
-      </div>
-
-      <!-- Projects Grid -->
-      <div class="portfolio-grid" id="portfolioGrid">
-
-        <!-- 1. Advanced Vehicle Tracker -->
-        <div class="portfolio-card" data-category="embedded iot" data-aos="fade-up" data-aos-delay="100">
-          <div class="pc-header">
-            <div class="pc-icon"><i class="fas fa-car"></i></div>
-            <div class="pc-tags">
-              <span class="pc-tag tag-embedded">Embedded</span>
-              <span class="pc-tag tag-iot">IoT</span>
-              <span class="pc-tag tag-firmware-white-bg">Firmware</span>
-              <span class="pc-tag tag-hardware-white-bg">Hardware</span>
-            </div>
-            <span class="pc-status status-completed">Completed</span>
-          </div>
-          <h3 class="pc-title">Advanced Vehicle Tracker</h3>
-          <p class="pc-desc">A GPS-based real-time vehicle tracking system with live location reporting, geofencing alerts, ignition detection, and remote monitoring via a connected backend dashboard.</p>
-          <div class="pc-stack">
-            <span>GPS Module</span>
-            <span>GSM/LTE</span>
-            <span>STM32</span>
-            <span>C Firmware</span>
-            <span>MQTT</span>
-          </div>
-          <div class="pc-outcome">
-            <i class="fas fa-check-circle"></i>
-            Real-time tracking with sub-30s location updates &amp; geofence alerts
-          </div>
-          <div class="pc-footer">
-            <span class="pc-no-link"><i class="fas fa-lock"></i> Client Project</span>
-          </div>
-        </div>
-
-        <!-- 2. Health Band -->
-        <div class="portfolio-card" data-category="embedded hardware" data-aos="fade-up" data-aos-delay="200">
-          <div class="pc-header">
-            <div class="pc-icon"><i class="fas fa-heartbeat"></i></div>
-            <div class="pc-tags">
-              <span class="pc-tag tag-embedded">Embedded</span>
-              <span class="pc-tag tag-embedded">BLE</span>
-              <span class="pc-tag tag-firmware-white-bg">Firmware</span>
-              <span class="pc-tag tag-hardware-white-bg">Hardware</span>
-            </div>
-            <span class="pc-status status-completed">Completed</span>
-          </div>
-          <h3 class="pc-title">Health Band</h3>
-          <p class="pc-desc">A wearable health monitoring band that continuously tracks heart rate, SpO₂, body temperature, and activity levels, syncing data wirelessly to a companion mobile application.</p>
-          <div class="pc-stack">
-            <span>nRF52</span>
-            <span>BLE</span>
-            <span>MAXM86146</span>
-            <span>PCB Design</span>
-            <span>C Firmware</span>
-            <span>FreeRTOS</span>
-          </div>
-          <div class="pc-outcome">
-            <i class="fas fa-check-circle"></i>
-            Continuous vitals monitoring with &lt;5% error margin on SpO₂ readings
-          </div>
-          <div class="pc-footer">
-            <span class="pc-no-link"><i class="fas fa-lock"></i> Client Project</span>
-          </div>
-        </div>
-
-        <!-- 3. Social Distancing Band -->
-        <div class="portfolio-card" data-category="embedded hardware iot" data-aos="fade-up" data-aos-delay="300">
-          <div class="pc-header">
-            <div class="pc-icon"><i class="fas fa-people-arrows"></i></div>
-            <div class="pc-tags">
-              <span class="pc-tag tag-embedded">Embedded</span>
-              <span class="pc-tag tag-iot">IoT</span>
-              <span class="pc-tag tag-firmware-white-bg">Firmware</span>
-              <span class="pc-tag tag-hardware-white-bg">Hardware</span>
-            </div>
-            <span class="pc-status status-completed">Completed</span>
-          </div>
-          <h3 class="pc-title">Social Distancing Band</h3>
-          <p class="pc-desc">A wearable proximity alert device using UWB and BLE to detect and warn users when safe distancing thresholds are breached — designed for workplace safety compliance.</p>
-          <div class="pc-stack">
-            <span>UWB</span>
-            <span>BLE</span>
-            <span>Nordic SoC</span>
-            <span>PCB Design</span>
-            <span>Haptic Feedback</span>
-          </div>
-          <div class="pc-outcome">
-            <i class="fas fa-check-circle"></i>
-            ±20cm proximity accuracy with instant haptic &amp; audio alerts
-          </div>
-          <div class="pc-footer">
-            <span class="pc-no-link"><i class="fas fa-lock"></i> Client Project</span>
-          </div>
-        </div>
-
-        <!-- 4. Gas Monitor -->
-        <div class="portfolio-card" data-category="embedded hardware safety" data-aos="fade-up" data-aos-delay="100">
-          <div class="pc-header">
-            <div class="pc-icon"><i class="fas fa-wind"></i></div>
-            <div class="pc-tags">
-              <span class="pc-tag tag-embedded">Embedded</span>
-              <span class="pc-tag tag-hardware-white-bg">Hardware</span>
-              <span class="pc-tag tag-firmware-white-bg">Firmware</span>
-              <span class="pc-tag tag-safety">Safety Critical</span>
-            </div>
-            <span class="pc-status status-completed">Completed</span>
-          </div>
-          <h3 class="pc-title">Gas Monitor</h3>
-          <p class="pc-desc">A portable industrial gas detection device capable of monitoring multiple hazardous gases simultaneously with real-time threshold alerts, data logging, and a ruggedized enclosure for field use.</p>
-          <div class="pc-stack">
-            <span>STM32</span>
-            <span>MQ Sensors</span>
-            <span>OLED Display</span>
-            <span>PCB Design</span>
-            <span>C Firmware</span>
-            <span>EN 50271</span>
-          </div>
-          <div class="pc-outcome">
-            <i class="fas fa-check-circle"></i>
-            Multi-gas detection with audible &amp; visual alarm under 2s response time
-          </div>
-          <div class="pc-footer">
-            <span class="pc-no-link"><i class="fas fa-lock"></i> Client Project</span>
-          </div>
-        </div>
-
-        <!-- 5. Air Quality Monitor + App -->
-        <div class="portfolio-card portfolio-card-featured" data-category="embedded iot mobile hardware" data-aos="fade-up" data-aos-delay="200">
-          <div class="pc-verified-label"><i class="fab fa-app-store-ios"></i> Live on App Store</div>
-          <div class="pc-header">
-            <div class="pc-icon"><i class="fas fa-tint"></i></div>
-            <div class="pc-tags">
-              <span class="pc-tag tag-iot">IoT</span>
-              <span class="pc-tag tag-mobile">Mobile App</span>
-              <span class="pc-tag tag-hardware">Hardware</span>
-              <span class="pc-tag tag-firmware">Firmware</span>
-            </div>
-            <span class="pc-status status-live">Live</span>
-          </div>
-          <h3 class="pc-title">Air Quality Monitor — Air OTG</h3>
-          <p class="pc-desc">A compact IoT air quality monitoring device paired with a native iOS app. Measures PM2.5, PM10, CO₂, humidity, and temperature — delivering live AQI readings and historical trends on your phone.</p>
-          <div class="pc-stack">
-            <span>BLE</span>
-            <span>PM Sensor</span>
-            <span>PCB Design</span>
-            <span>Firmware</span>
-            <span>iOS (Swift)</span>
-            <span>CoreBluetooth</span>
-          </div>
-          <div class="pc-outcome">
-            <i class="fas fa-check-circle"></i>
-            Published on the App Store — live AQI monitoring via BLE companion app
-          </div>
-          <div class="pc-footer">
-            <a href="https://apps.apple.com/mk/app/air-otg/id6749178793" target="_blank" rel="noopener" class="pc-link">
-              <i class="fab fa-app-store-ios"></i> View on App Store
-            </a>
-          </div>
-        </div>
-
-        <!-- 6. CO Leak Detector + App -->
-        <div class="portfolio-card portfolio-card-featured" data-category="embedded iot mobile hardware" data-aos="fade-up" data-aos-delay="300">
-          <div class="pc-verified-label"><i class="fab fa-app-store-ios"></i> Live on App Store</div>
-          <div class="pc-header">
-            <div class="pc-icon"><i class="fas fa-exclamation-triangle"></i></div>
-            <div class="pc-tags">
-              <span class="pc-tag tag-iot">IoT</span>
-              <span class="pc-tag tag-mobile">Mobile App</span>
-              <span class="pc-tag tag-hardware">Hardware</span>
-              <span class="pc-tag tag-firmware">Firmware</span>
-            </div>
-            <span class="pc-status status-live">Live</span>
-          </div>
-          <h3 class="pc-title">CO Leak Detector — OTG CO</h3>
-          <p class="pc-desc">A smart carbon monoxide leak detection device with a companion iOS app. Provides real-time CO level readings over BLE, push alert notifications, and safety threshold configuration directly from your phone.</p>
-          <div class="pc-stack">
-            <span>BLE</span>
-            <span>CO Sensor</span>
-            <span>PCB Design</span>
-            <span>Firmware</span>
-            <span>iOS (Swift)</span>
-            <span>CoreBluetooth</span>
-          </div>
-          <div class="pc-outcome">
-            <i class="fas fa-check-circle"></i>
-            Published on the App Store — instant CO alerts via BLE with configurable thresholds
-          </div>
-          <div class="pc-footer">
-            <a href="https://apps.apple.com/mk/app/otg-co-leak-detector/id6740924509" target="_blank" rel="noopener" class="pc-link">
-              <i class="fab fa-app-store-ios"></i> View on App Store
-            </a>
-          </div>
-        </div>
-
-        <!-- 7. Child Minder + Connected Safety Hardware -->
-        <div class="portfolio-card portfolio-card-featured" data-category="embedded iot mobile hardware safety" data-aos="fade-up" data-aos-delay="100">
-          <div class="pc-verified-label"><i class="fab fa-app-store-ios"></i> Live on App Store</div>
-          <div class="pc-header">
-            <div class="pc-icon"><i class="fas fa-child"></i></div>
-            <div class="pc-tags">
-              <span class="pc-tag tag-iot">IoT</span>
-              <span class="pc-tag tag-mobile">Mobile App</span>
-              <span class="pc-tag tag-hardware">Hardware</span>
-              <span class="pc-tag tag-firmware">Firmware</span>
-              <span class="pc-tag tag-safety">Safety Critical</span>
-            </div>
-            <span class="pc-status status-live">Live</span>
-          </div>
-          <h3 class="pc-title">Child Minder — Safer Child App</h3>
-          <p class="pc-desc">A connected child safety monitoring system integrating a seat clip (FlexClip) and ePad child-seat sensor. The iOS app supports dual roles (Parent and Driver), monitors child presence in vehicle seats, and triggers real-time alarm workflows on unattended-child and movement events.</p>
-          <div class="pc-stack">
-            <span>BLE</span>
-            <span>iOS (Swift)</span>
-            <span>Dual Login Roles</span>
-            <span>Event Alerts</span>
-            <span>Seat Clip + ePad</span>
-          </div>
-          <div class="pc-outcome">
-            <i class="fas fa-check-circle"></i>
-            Live production deployment for parent-driver child safety monitoring with hardware event alarms
-          </div>
-          <div class="pc-footer">
-            <a href="https://apps.apple.com/us/app/child-minder-safer-child-app/id1597459223" target="_blank" rel="noopener" class="pc-link">
-              <i class="fab fa-app-store-ios"></i> View on App Store
-            </a>
-            <a href="https://babyalert.info/products/flexclip-monitor" target="_blank" rel="noopener" class="pc-link" style="margin-left:14px;">
-              <i class="fas fa-link"></i> FlexClip
-            </a>
-            <a href="https://babyalert.info/products/epad-monitor-black" target="_blank" rel="noopener" class="pc-link" style="margin-left:14px;">
-              <i class="fas fa-link"></i> Epad
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="portfolio-more" data-aos="fade-up">
-        <p><i class="fas fa-layer-group"></i> More projects coming soon — we're always building.</p>
-        <a href="#contact" class="btn btn-outline">Discuss Your Project <i class="fas fa-arrow-right"></i></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== WHY US / CORE VALUES ========== -->
-  <section id="why-us" class="values-section section">
-    <div class="container">
-      <div class="section-header" data-aos="fade-up">
-        <div class="section-tag">Why Mikronexis</div>
-        <h2 class="section-title">Our Core Values</h2>
-        <p class="section-sub">These principles guide every decision, every line of code, and every circuit we design.</p>
-      </div>
-
-      <div class="values-grid">
-        <div class="value-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="value-icon"><i class="fas fa-gem"></i></div>
-          <h3>Engineering Excellence</h3>
-          <p>Strong focus on quality and precision at every layer of development — from architecture to deployment.</p>
-        </div>
-        <div class="value-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="value-icon"><i class="fas fa-lightbulb"></i></div>
-          <h3>Innovation</h3>
-          <p>Continuous improvement and forward-thinking keeps our solutions ahead of technology curves.</p>
-        </div>
-        <div class="value-card" data-aos="fade-up" data-aos-delay="300">
-          <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
-          <h3>Reliability</h3>
-          <p>We build systems that clients can trust — robust, tested, and ready for production environments.</p>
-        </div>
-        <div class="value-card" data-aos="fade-up" data-aos-delay="400">
-          <div class="value-icon"><i class="fas fa-expand-arrows-alt"></i></div>
-          <h3>Scalability</h3>
-          <p>Solutions designed with growth in mind — architected to scale from prototype to enterprise level.</p>
-        </div>
-        <div class="value-card" data-aos="fade-up" data-aos-delay="500">
-          <div class="value-icon"><i class="fas fa-handshake"></i></div>
-          <h3>Integrity</h3>
-          <p>Transparent and ethical practices — honest communication and commitment throughout every engagement.</p>
-        </div>
-        <div class="value-card" data-aos="fade-up" data-aos-delay="600">
-          <div class="value-icon"><i class="fas fa-layer-group"></i></div>
-          <h3>Full-Stack Thinking</h3>
-          <p>Holistic engineering from software logic to silicon — we see the complete system, not just its parts.</p>
-        </div>
-      </div>
-
-      <!-- Process Strip -->
-      <div class="process-strip" data-aos="fade-up">
-        <div class="section-tag center-tag">How We Work</div>
-        <div class="process-steps">
-          <div class="process-step">
-            <div class="step-circle"><i class="fas fa-comments"></i></div>
-            <h4>Discover</h4>
-            <p>Understand requirements, constraints, and goals through deep technical consultation.</p>
-          </div>
-          <div class="process-arrow"><i class="fas fa-chevron-right"></i></div>
-          <div class="process-step">
-            <div class="step-circle"><i class="fas fa-drafting-compass"></i></div>
-            <h4>Design</h4>
-            <p>Architect the solution — system design, technology selection, and prototyping.</p>
-          </div>
-          <div class="process-arrow"><i class="fas fa-chevron-right"></i></div>
-          <div class="process-step">
-            <div class="step-circle"><i class="fas fa-code"></i></div>
-            <h4>Develop</h4>
-            <p>Agile engineering cycles delivering working, tested increments consistently.</p>
-          </div>
-          <div class="process-arrow"><i class="fas fa-chevron-right"></i></div>
-          <div class="process-step">
-            <div class="step-circle"><i class="fas fa-vial"></i></div>
-            <h4>Validate</h4>
-            <p>Rigorous testing against real-world conditions before any delivery.</p>
-          </div>
-          <div class="process-arrow"><i class="fas fa-chevron-right"></i></div>
-          <div class="process-step">
-            <div class="step-circle"><i class="fas fa-rocket"></i></div>
-            <h4>Deploy</h4>
-            <p>Smooth delivery, documentation, and ongoing support as needed.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== INDUSTRIES / TARGET MARKET ========== -->
-  <section id="market" class="market-section section">
-    <div class="market-bg"></div>
-    <div class="container">
-      <div class="section-header" data-aos="fade-up">
-        <div class="section-tag">Industries We Serve</div>
-        <h2 class="section-title">Who We Work With</h2>
-        <p class="section-sub">Mikronexis brings value across a broad range of industries and company types.</p>
-      </div>
-
-      <div class="market-grid">
-        <div class="market-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="market-icon"><i class="fas fa-rocket"></i></div>
-          <h3>Startups &amp; Product Companies</h3>
-          <p>We help early-stage and growth-stage product companies build their core technology, from MVP to production-ready systems.</p>
-        </div>
-        <div class="market-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="market-icon"><i class="fas fa-industry"></i></div>
-          <h3>Industrial &amp; Manufacturing</h3>
-          <p>Smart automation and embedded control systems for manufacturing environments requiring reliability and precision.</p>
-        </div>
-        <div class="market-card" data-aos="fade-up" data-aos-delay="300">
-          <div class="market-icon"><i class="fas fa-wifi"></i></div>
-          <h3>IoT &amp; Smart Devices</h3>
-          <p>End-to-end solutions for connected device companies — firmware, connectivity, cloud integration, and companion apps.</p>
-        </div>
-        <div class="market-card" data-aos="fade-up" data-aos-delay="400">
-          <div class="market-icon"><i class="fas fa-building"></i></div>
-          <h3>Enterprises</h3>
-          <p>Custom technology solutions for enterprises requiring bespoke software or hardware to meet unique operational needs.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PRODUCTS TEASER ========== -->
-  <section id="products" class="products-section section">
-    <div class="container">
-      <div class="products-inner" data-aos="fade-up">
-        <div class="products-content">
-          <div class="section-tag">Coming Soon</div>
-          <h2 class="section-title">Mikronexis Products</h2>
-          <p>
-            Beyond consulting, Mikronexis is building its own portfolio of software and hardware products — intelligent tools, IoT platforms, and embedded modules designed to solve real engineering challenges.
-          </p>
-          <p>
-            Our products will reflect the same engineering standards and precision we apply to every client engagement.
-          </p>
-          <a href="#contact" class="btn btn-primary mt-2">
-            Stay Notified <i class="fas fa-bell"></i>
-          </a>
-        </div>
-        <div class="products-visual" data-aos="fade-left">
-          <div class="product-mockup">
-            <div class="mockup-screen">
-              <div class="mockup-bar"></div>
-              <div class="mockup-content">
-                <div class="mockup-icon"><i class="fas fa-box-open"></i></div>
-                <span>Products Loading...</span>
-                <div class="mockup-progress"><div class="progress-fill"></div></div>
-              </div>
-            </div>
-            <div class="mockup-glow"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== CONTACT SECTION ========== -->
-  <section id="contact" class="contact-section section">
-    <div class="contact-bg-pattern"></div>
-    <div class="container">
-      <div class="section-header" data-aos="fade-up">
-        <div class="section-tag">Get In Touch</div>
-        <h2 class="section-title">Let's Build Something Great</h2>
-        <p class="section-sub">Have a project in mind? Tell us about it. We'd love to hear about your engineering challenge.</p>
-      </div>
-
-      <div class="contact-grid">
-        <div class="contact-info" data-aos="fade-right">
-          <h3>Start the Conversation</h3>
-          <p>Whether you're a startup with an idea or an enterprise with a complex engineering challenge, we're ready to help you navigate the technical path forward.</p>
-
-          <div class="contact-items">
-            <div class="contact-item">
-              <div class="ci-icon"><i class="fas fa-envelope"></i></div>
-              <div>
-                <strong>Email Us</strong>
-                <span>bilal@mikronexis.com</span>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="ci-icon"><i class="fas fa-globe"></i></div>
-              <div>
-                <strong>Website</strong>
-                <span>www.mikronexis.com</span>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
-              <div>
-                <strong>Location</strong>
-                <span>Available Globally · Remote-first</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-social">
-            <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" class="social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="#" class="social-btn" aria-label="Twitter/X"><i class="fab fa-x-twitter"></i></a>
-          </div>
-
-          <div class="contact-tagline">
-            <blockquote>
-              "At Mikronexis, we don't just develop technology — we engineer systems that power innovation, efficiency, and growth."
-            </blockquote>
-          </div>
-        </div>
-
-        <div class="contact-form-wrap" data-aos="fade-left">
-          <form class="contact-form" id="contactForm" novalidate>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="firstName">First Name *</label>
-                <input type="text" id="firstName" name="firstName" placeholder="John" required />
-                <span class="field-error"></span>
-              </div>
-              <div class="form-group">
-                <label for="lastName">Last Name *</label>
-                <input type="text" id="lastName" name="lastName" placeholder="Doe" required />
-                <span class="field-error"></span>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="email">Email Address *</label>
-              <input type="email" id="email" name="email" placeholder="john@company.com" required />
-              <span class="field-error"></span>
-            </div>
-            <div class="form-group">
-              <label for="company">Company / Organization</label>
-              <input type="text" id="company" name="company" placeholder="Your Company" />
-            </div>
-            <div class="form-group">
-              <label for="service">Service Interested In</label>
-              <select id="service" name="service">
-                <option value="">Select a service...</option>
-                <option value="software">Software Development</option>
-                <option value="embedded">Embedded Systems</option>
-                <option value="hardware">Hardware Design</option>
-                <option value="consulting">Technology Consulting</option>
-                <option value="mcad">Mechanical Design (MCAD)</option>
-                <option value="ai-ml">AI / Machine Learning</option>
-                <option value="safety-critical">Safety Critical Devices</option>
-                <option value="embedded-security">Cybersecurity / CRA Compliance</option>
-                <option value="multiple">Multiple Services</option>
-                <option value="products">Mikronexis Products</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="message">Tell Us About Your Project *</label>
-              <textarea id="message" name="message" rows="5" placeholder="Describe your project, technology requirements, timeline, or any specific challenges you're facing..." required></textarea>
-              <span class="field-error"></span>
-            </div>
-            <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
-              <span class="btn-text">Send Message</span>
-              <span class="btn-loading" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Sending...</span>
-              <i class="fas fa-paper-plane"></i>
-            </button>
-            <div class="form-success" id="formSuccess" style="display:none;">
-              <i class="fas fa-check-circle"></i>
-              <p>Thank you! Your message has been received. We'll get back to you within 24–48 hours.</p>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <div class="footer-top">
-      <div class="container">
-        <div class="footer-grid">
-          <div class="footer-brand">
-            <img src="assests/logo_dark.png" alt="Mikronexis" class="footer-logo" />
-            <p>Engineering-driven technology consulting and product company — bridging software and hardware into intelligent, connected systems.</p>
-            <div class="footer-social">
-              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-              <a href="#" aria-label="Twitter/X"><i class="fab fa-x-twitter"></i></a>
-            </div>
-          </div>
-
-          <div class="footer-col">
-            <h4>Services</h4>
-            <ul>
-              <li><a href="#services">Software Development</a></li>
-              <li><a href="#services">Embedded Systems</a></li>
-              <li><a href="#services">Hardware Design</a></li>
-              <li><a href="#services">Technology Consulting</a></li>
-              <li><a href="safety-critical.html">Safety Critical Devices</a></li>
-              <li><a href="cybersecurity.html">Cybersecurity for Embedded</a></li>
-              <li><a href="#services">AI &amp; ML <span class="soon-tag">Soon</span></a></li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
-            <h4>Company</h4>
-            <ul>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#projects">Projects</a></li>
-              <li><a href="#why-us">Why Mikronexis</a></li>
-              <li><a href="#market">Industries</a></li>
-              <li><a href="#products">Products <span class="soon-tag">Soon</span></a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
-            <h4>Contact</h4>
-            <ul>
-              <li><i class="fas fa-envelope"></i> bilal@mikronexis.com</li>
-              <li><i class="fas fa-globe"></i> www.mikronexis.com</li>
-              <li><i class="fas fa-map-marker-alt"></i> Global · Remote-first</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="container">
-        <p>&copy; <span id="footerYear"></span> Mikronexis. All rights reserved.</p>
-        <p class="footer-tagline">Connecting Ideas to Reality</p>
-      </div>
+    <div class="foot__meta">
+      <span>&copy; <span id="year">2026</span> Mikro Pixel Studios</span>
+      <nav class="foot__links" aria-label="Elsewhere">
+        <a href="#">Bluesky</a>
+        <a href="#">Discord</a>
+        <a href="#">Press</a>
+      </nav>
     </div>
   </footer>
 
-  <!-- Back to top -->
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">
-    <i class="fas fa-chevron-up"></i>
-  </button>
+</div>
 
-  <script src="js/main.js"></script>
+<script src="assets/js/main.js"></script>
+
 </body>
 </html>
